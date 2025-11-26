@@ -1,0 +1,32 @@
+{
+  "name": "mcp-any-rest-docs",
+  "version": "1.0.0",
+  "description": "MCP-ANY-REST Documentation and Blog Website",
+  "main": "index.js",
+  "scripts": {
+    "docs:dev": "vuepress dev src",
+    "docs:build": "vuepress build src"
+  },
+  "keywords": [
+    "vuepress",
+    "documentation",
+    "blog",
+    "mcp-any-rest"
+  ],
+  "author": "MCP-ANY-REST Team",
+  "license": "MIT",
+  "devDependencies": {
+    "@vuepress/plugin-search": "^2.0.0-rc.118",
+    "sass-embedded": "^1.93.3",
+    "vuepress": "^2.0.0-rc.0",
+    "vuepress-plugin-md-enhance": "^2.0.0-rc.98",
+    "vuepress-theme-hope": "^2.0.0-rc.98"
+  },
+  "dependencies": {
+    "@vue/repl": "^4.7.0",
+    "@vuepress/bundler-vite": "^2.0.0-rc.26",
+    "chart.js": "^4.5.1",
+    "echarts": "^6.0.0",
+    "mermaid": "^11.12.1"
+  }
+}

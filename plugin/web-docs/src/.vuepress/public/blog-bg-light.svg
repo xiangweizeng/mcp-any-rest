@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <!-- Background Gradient: Clean Light Blue/Grey -->
+    <radialGradient id="bgGradLight" cx="50%" cy="50%" r="80%" fx="50%" fy="50%">
+      <stop offset="0%" style="stop-color:#f8fafc;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#e2e8f0;stop-opacity:1" />
+    </radialGradient>
+    
+    <!-- Circuit/Grid Pattern (Subtle Grey) -->
+    <pattern id="circuitLight" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse">
+      <path d="M20,20 L80,20 L80,80 L20,80 Z" stroke="#94a3b8" stroke-width="0.5" stroke-opacity="0.2" fill="none"/>
+      <circle cx="20" cy="20" r="1" fill="#3b82f6" fill-opacity="0.3"/>
+      <circle cx="80" cy="80" r="1" fill="#3b82f6" fill-opacity="0.3"/>
+    </pattern>
+
+    <!-- Soft Shadow for Elements -->
+    <filter id="shadowLight">
+      <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="100%" height="100%" fill="url(#bgGradLight)" />
+  <rect width="100%" height="100%" fill="url(#circuitLight)" />
+
+  <!-- MCP Network Visualization (Light Mode) -->
+  <g transform="translate(800, 450)">
+    <!-- Central Hub (The Server) -->
+    <circle cx="0" cy="0" r="80" stroke="#3b82f6" stroke-width="2" stroke-opacity="0.2" fill="none" />
+    <circle cx="0" cy="0" r="60" stroke="#3b82f6" stroke-width="1" stroke-dasharray="10, 5" stroke-opacity="0.4" fill="none">
+        <animateTransform attributeName="transform" type="rotate" from="0 0 0" to="360 0 0" dur="20s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="0" cy="0" r="15" fill="#3b82f6" filter="url(#shadowLight)" opacity="0.8" />
+
+    <!-- Connecting Lines (Protocol Context) -->
+    <!-- Node 1 -->
+    <line x1="0" y1="0" x2="-300" y2="-200" stroke="#64748b" stroke-width="1.5" stroke-opacity="0.3" />
+    <circle cx="-300" cy="-200" r="10" fill="#2563eb" filter="url(#shadowLight)" />
+    <text x="-320" y="-220" fill="#475569" font-family="monospace" font-size="12" opacity="0.8">CLIENT</text>
+
+    <!-- Node 2 -->
+    <line x1="0" y1="0" x2="350" y2="-150" stroke="#64748b" stroke-width="1.5" stroke-opacity="0.3" />
+    <circle cx="350" cy="-150" r="10" fill="#2563eb" filter="url(#shadowLight)" />
+    <text x="360" y="-170" fill="#475569" font-family="monospace" font-size="12" opacity="0.8">RESOURCE</text>
+
+    <!-- Node 3 -->
+    <line x1="0" y1="0" x2="-250" y2="250" stroke="#64748b" stroke-width="1.5" stroke-opacity="0.3" />
+    <circle cx="-250" cy="250" r="10" fill="#2563eb" filter="url(#shadowLight)" />
+    <text x="-270" y="275" fill="#475569" font-family="monospace" font-size="12" opacity="0.8">PROMPT</text>
+
+    <!-- Node 4 -->
+    <line x1="0" y1="0" x2="300" y2="200" stroke="#64748b" stroke-width="1.5" stroke-opacity="0.3" />
+    <circle cx="300" cy="200" r="10" fill="#2563eb" filter="url(#shadowLight)" />
+    <text x="310" y="225" fill="#475569" font-family="monospace" font-size="12" opacity="0.8">TOOL</text>
+  </g>
+
+  <!-- Abstract Data Bits (Darker Blue) -->
+  <rect x="200" y="100" width="4" height="4" fill="#3b82f6" opacity="0.3" />
+  <rect x="220" y="110" width="4" height="4" fill="#3b82f6" opacity="0.1" />
+  <rect x="1400" y="800" width="4" height="4" fill="#3b82f6" opacity="0.3" />
+  
+  <!-- Hexagon Decoration (Subtle Grey) -->
+  <path d="M100,800 L130,780 L160,800 L160,840 L130,860 L100,840 Z" stroke="#64748b" stroke-width="1" stroke-opacity="0.2" fill="none" />
+</svg>

@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <!-- Deep Space Gradient -->
+    <radialGradient id="deepSpace" cx="50%" cy="50%" r="90%" fx="50%" fy="50%">
+      <stop offset="0%" style="stop-color:#0f172a;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#020617;stop-opacity:1" />
+    </radialGradient>
+    
+    <!-- Hexagon Pattern -->
+    <pattern id="hexGrid" width="100" height="173.2" patternUnits="userSpaceOnUse">
+      <path d="M50 0 L100 28.86 L100 86.6 L50 115.46 L0 86.6 L0 28.86 Z" fill="none" stroke="#38bdf8" stroke-width="0.5" stroke-opacity="0.03"/>
+    </pattern>
+
+    <!-- Glowing Line Animation -->
+    <linearGradient id="beamGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#38bdf8;stop-opacity:0" />
+      <stop offset="50%" style="stop-color:#38bdf8;stop-opacity:0.5" />
+      <stop offset="100%" style="stop-color:#38bdf8;stop-opacity:0" />
+    </linearGradient>
+  </defs>
+
+  <!-- Base Background -->
+  <rect width="100%" height="100%" fill="url(#deepSpace)" />
+  <rect width="100%" height="100%" fill="url(#hexGrid)" />
+
+  <!-- Animated Vertical Data Streams -->
+  <g>
+    <rect x="20%" y="-100" width="1" height="300" fill="url(#beamGrad)" opacity="0.3">
+      <animate attributeName="y" from="-300" to="1080" dur="7s" repeatCount="indefinite" />
+    </rect>
+    <rect x="50%" y="-100" width="1" height="400" fill="url(#beamGrad)" opacity="0.2">
+      <animate attributeName="y" from="-400" to="1080" dur="5s" repeatCount="indefinite" begin="1s"/>
+    </rect>
+    <rect x="80%" y="-100" width="1" height="250" fill="url(#beamGrad)" opacity="0.4">
+      <animate attributeName="y" from="-250" to="1080" dur="9s" repeatCount="indefinite" begin="2s"/>
+    </rect>
+    <rect x="35%" y="-100" width="1" height="350" fill="url(#beamGrad)" opacity="0.15">
+      <animate attributeName="y" from="-350" to="1080" dur="11s" repeatCount="indefinite" begin="0.5s"/>
+    </rect>
+    <rect x="65%" y="-100" width="1" height="300" fill="url(#beamGrad)" opacity="0.25">
+      <animate attributeName="y" from="-300" to="1080" dur="8s" repeatCount="indefinite" begin="3s"/>
+    </rect>
+  </g>
+
+  <!-- Large Abstract Circles -->
+  <circle cx="90%" cy="10%" r="400" fill="url(#beamGrad)" opacity="0.05" />
+  <circle cx="10%" cy="90%" r="300" fill="#38bdf8" opacity="0.03" />
+
+</svg>

@@ -80,4 +80,3 @@ cargo run --bin zml -- compile -i config/zml/project.zml --pretty
 ## 进一步阅读
 - 规范（中文）：`docs/ZML_SPECIFICATION.md`
 - 规范（英文）：`docs/ZML_SPECIFICATION_EN.md`
-- 嵌套与引用验证：`docs/ZML_NESTING_REFERENCE_VALIDATION*.md`

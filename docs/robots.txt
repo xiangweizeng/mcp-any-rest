@@ -1,0 +1,4 @@
+User-agent:*
+Disallow:
+
+Sitemap: https://mcp-any-rest.example.com/sitemap.xml

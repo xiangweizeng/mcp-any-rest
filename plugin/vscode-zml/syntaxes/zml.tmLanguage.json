@@ -1,0 +1,125 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "ZenTao Module Language (ZML)",
+  "scopeName": "source.zml",
+  "fileTypes": ["zml"],
+  "patterns": [
+    { "include": "#comments" },
+    { "include": "#strings" },
+    { "include": "#numbers" },
+    { "include": "#boolean" },
+    { "include": "#keywords" },
+    { "include": "#declarations" },
+    { "include": "#attributes" },
+    { "include": "#types" },
+    { "include": "#httpMethods" },
+    { "include": "#accessLevels" },
+    { "include": "#rateLimit" },
+    { "include": "#enumRef" },
+    { "include": "#propertyKeys" },
+    { "include": "#punctuation" }
+  ],
+  "repository": {
+    "comments": {
+      "patterns": [
+        { "name": "comment.line.double-slash.zml", "match": "//.*$" },
+        { "name": "comment.block.zml", "begin": "/\\*", "end": "\\*/" }
+      ]
+    },
+    "strings": {
+      "name": "string.quoted.double.zml",
+      "begin": "\"",
+      "end": "\"",
+      "patterns": [ { "name": "constant.character.escape.zml", "match": "\\\\." } ]
+    },
+    "numbers": {
+      "patterns": [
+        { "name": "constant.numeric.float.zml", "match": "\\b-?\\d+\\.\\d+\\b" },
+        { "name": "constant.numeric.integer.zml", "match": "\\b-?\\d+\\b" }
+      ]
+    },
+    "boolean": { "name": "constant.language.boolean.zml", "match": "\\b(true|false)\\b" },
+    "keywords": { "name": "keyword.control.zml", "match": "\\b(module|extends|type|enum|method|resource|template|params|response)\\b" },
+    "declarations": {
+      "patterns": [
+        {
+          "name": "meta.module.zml",
+          "begin": "\\b(module)\\b\\s+([A-Za-z_][A-Za-z_0-9]*)",
+          "beginCaptures": { "1": { "name": "keyword.control.module.zml" }, "2": { "name": "entity.name.namespace.zml" } },
+          "end": "\\{",
+          "endCaptures": { "0": { "name": "punctuation.section.block.begin.zml" } }
+        },
+        {
+          "name": "meta.type.zml",
+          "begin": "\\b(type)\\b\\s+([A-Za-z_][A-Za-z_0-9]*)",
+          "beginCaptures": { "1": { "name": "keyword.declaration.type.zml" }, "2": { "name": "entity.name.type.zml" } },
+          "end": "\\{",
+          "endCaptures": { "0": { "name": "punctuation.section.block.begin.zml" } }
+        },
+        {
+          "name": "meta.enum.zml",
+          "begin": "\\b(enum)\\b\\s+([A-Za-z_][A-Za-z_0-9]*)",
+          "beginCaptures": { "1": { "name": "keyword.declaration.enum.zml" }, "2": { "name": "entity.name.enum.zml" } },
+          "end": "\\{",
+          "endCaptures": { "0": { "name": "punctuation.section.block.begin.zml" } }
+        },
+        {
+          "name": "meta.method.zml",
+          "begin": "\\b(method)\\b\\s+([A-Za-z_][A-Za-z_0-9]*)",
+          "beginCaptures": { "1": { "name": "keyword.declaration.function.zml" }, "2": { "name": "entity.name.function.zml" } },
+          "end": "\\{",
+          "endCaptures": { "0": { "name": "punctuation.section.block.begin.zml" } }
+        },
+        {
+          "name": "meta.resource.zml",
+          "begin": "\\b(resource)\\b\\s+([A-Za-z_][A-Za-z_0-9]*)",
+          "beginCaptures": { "1": { "name": "keyword.declaration.zml" }, "2": { "name": "entity.name.class.zml" } },
+          "end": "\\{",
+          "endCaptures": { "0": { "name": "punctuation.section.block.begin.zml" } }
+        },
+        {
+          "name": "meta.template.zml",
+          "begin": "\\b(template)\\b\\s+([A-Za-z_][A-Za-z_0-9]*)",
+          "beginCaptures": { "1": { "name": "keyword.declaration.zml" }, "2": { "name": "entity.name.tag.zml" } },
+          "end": "\\{",
+          "endCaptures": { "0": { "name": "punctuation.section.block.begin.zml" } }
+        }
+      ]
+    },
+    "attributes": {
+      "patterns": [
+        { "name": "keyword.other.attribute.zml", "match": "\\b(description|http_method|uri|access_level|rate_limit|version|enabled|category)\\b" },
+        { "name": "keyword.other.params.zml", "match": "\\b(params|response)\\b" }
+      ]
+    },
+    "types": {
+      "patterns": [
+        { "name": "storage.type.builtin.zml", "match": "\\b(string|integer|number|boolean|date|datetime|any)\\b" },
+        { "name": "keyword.operator.type.zml", "match": "\\b(array|object|enum|ref)\\b" }
+      ]
+    },
+    "httpMethods": { "name": "constant.language.http-method.zml", "match": "\\b(GET|POST|PUT|DELETE|PATCH)\\b" },
+    "accessLevels": { "name": "constant.language.access-level.zml", "match": "\\b(public|private|internal)\\b" },
+    "rateLimit": { "name": "constant.numeric.rate-limit.zml", "match": "\\b\\d+\\s*/\\s*\\d+\\b" },
+    "enumRef": { "name": "support.constant.enum.member.zml", "match": "\\b[A-Za-z_][A-Za-z_0-9]*(?:\\.[A-Za-z_][A-Za-z_0-9]*)+\\b" },
+    "propertyKeys": {
+      "name": "variable.other.property.zml",
+      "match": "(^\\s*|[\\{,]\\s*)([A-Za-z_][A-Za-z_0-9]*)\\s*:",
+      "captures": { "2": { "name": "variable.other.property.zml" } }
+    },
+    "punctuation": {
+      "patterns": [
+        { "name": "punctuation.separator.key-value.zml", "match": ":" },
+        { "name": "punctuation.separator.equals.zml", "match": "=" },
+        { "name": "punctuation.definition.optional.zml", "match": "\\?" },
+        { "name": "punctuation.separator.comma.zml", "match": "," },
+        { "name": "punctuation.section.block.begin.zml", "match": "\\{" },
+        { "name": "punctuation.section.block.end.zml", "match": "\\}" },
+        { "name": "punctuation.section.brackets.begin.zml", "match": "\\[" },
+        { "name": "punctuation.section.brackets.end.zml", "match": "\\]" },
+        { "name": "punctuation.definition.generic.begin.zml", "match": "<" },
+        { "name": "punctuation.definition.generic.end.zml", "match": ">" }
+      ]
+    }
+  }
+}

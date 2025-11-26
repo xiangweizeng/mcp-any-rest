@@ -5,4 +5,4 @@ target-dev/*
 target_temp/*
 plugin/web-docs/src/.vuepress/.temp/
 plugin/web-docs/src/.vuepress/.cache/
-plugin/
+plugin/zml_spec

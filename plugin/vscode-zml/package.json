@@ -1,0 +1,72 @@
+{
+  "name": "zentao-zml-syntax",
+  "displayName": "ZenTao ZML Syntax and Formatter",
+  "description": "Syntax highlighting and formatting support for ZenTao Module Language (ZML)",
+  "version": "0.0.2",
+  "publisher": "zentao",
+  "engines": {
+    "vscode": "^1.60.0"
+  },
+  "categories": [
+    "Programming Languages",
+    "Formatters"
+  ],
+  "activationEvents": [
+    "onLanguage:zml"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "languages": [
+      {
+        "id": "zml",
+        "aliases": [
+          "ZML",
+          "ZenTao Module Language"
+        ],
+        "extensions": [
+          ".zml"
+        ],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "zml",
+        "scopeName": "source.zml",
+        "path": "./syntaxes/zml.tmLanguage.json"
+      }
+    ],
+    "configuration": {
+      "title": "ZML Formatter",
+      "properties": {
+        "zml.format.enable": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable/disable ZML formatting"
+        },
+        "zml.format.indentSize": {
+          "type": "number",
+          "default": 2,
+          "description": "Number of spaces for indentation"
+        },
+        "zml.format.maxLineLength": {
+          "type": "number",
+          "default": 120,
+          "description": "Maximum line length before wrapping"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "package": "vsce package"
+  },
+  "devDependencies": {
+    "@types/node": "^18.0.0",
+    "@types/vscode": "^1.60.0",
+    "@vscode/vsce": "^3.7.1",
+    "typescript": "^4.9.0"
+  }
+}
