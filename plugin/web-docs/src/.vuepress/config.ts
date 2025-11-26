@@ -26,15 +26,15 @@ export default defineUserConfig({
   bundler: viteBundler(),
 
   theme: hopeTheme({
-    hostname: "https://mcp-any-rest.example.com/",
+    hostname: "https://xiangweizeng.github.io/mcp-any-rest/",
 
     author: {
       name: "MCP-ANY-REST Team",
-      url: "https://github.com/xiangweizeng/mcp-any-rest",
+      url: "https://github.com/xiangweizeng/",
     },
 
     logo: "/logo.svg",
-    repo: "xiangweizeng/mcp-any-rest",
+    repo: "https://github.com/xiangweizeng/mcp-any-rest",
     docsDir: "web-docs/src",
     darkmode: "switch",
 
