@@ -1,0 +1,141 @@
+// ZML grammar definition - using PEG syntax
+
+// Top-level rules
+file = { SOI ~ WHITESPACE* ~ (template_def | module_def)* ~ WHITESPACE* ~ EOI }
+
+// Module definition
+module_def = { "module" ~ identifier ~ extends_clause? ~ "{" ~ module_content* ~ "}" }
+extends_clause = { "extends" ~ identifier }
+
+// Module content
+module_content = { 
+    type_def | 
+    enum_def |
+    method_def | 
+    resource_def | 
+    template_def |
+    property_def
+}
+
+// Type definition
+type_def = { "type" ~ identifier ~ "{" ~ field_def* ~ "}" }
+
+// Enum definition
+enum_def = { "enum" ~ identifier ~ "{" ~ WHITESPACE* ~ (enum_value_def ~ WHITESPACE*)* ~ "}" }
+
+// Enum value definition
+enum_value_def = { identifier ~ ("=" ~ WHITESPACE* ~ value)? ~ comment? }
+
+// Field definition
+field_def = { identifier ~ ":" ~ type_expr ~ optional_marker? ~ default_value? ~ field_comment? }
+optional_marker = { "?" }
+default_value = { "=" ~ WHITESPACE* ~ value }
+field_comment = { comment }
+
+// Type expression
+type_expr = { 
+    basic_type |
+    array_type |
+    object_type |
+    enum_type |
+    ref_type |
+    identifier
+}
+
+// Basic types
+basic_type = @{ "string" | "integer" | "number" | "boolean" | "date" | "datetime" | "any" }
+
+// Array type
+array_type = { "array" ~ "<" ~ type_expr ~ ">" }
+
+// Object type
+object_type = { "object" ~ "{" ~ field_def* ~ "}" }
+
+// Enum type
+enum_type = { "enum" ~ "[" ~ enum_values ~ "]" }
+enum_values = { value ~ ("," ~ value)* }
+
+// Reference type
+ref_type = { "ref" ~ ":" ~ identifier }
+
+// Method definition
+method_def = { "method" ~ identifier ~ "{" ~ method_content* ~ "}" }
+
+// Method content
+method_content = {
+    description_def |
+    http_method_def |
+    uri_def |
+    access_level_def |
+    rate_limit_def |
+    params_def |
+    response_def
+}
+
+// Method attributes
+description_def = { "description" ~ ":" ~ string }
+http_method_def = { "http_method" ~ ":" ~ http_method_value }
+http_method_value = @{ "GET" | "POST" | "PUT" | "DELETE" | "PATCH" }
+uri_def = { "uri" ~ ":" ~ string }
+access_level_def = { "access_level" ~ ":" ~ access_level_value }
+access_level_value = @{ "public" | "private" | "internal" }
+rate_limit_def = { "rate_limit" ~ ":" ~ (rate_limit_object | rate_limit_simple) }
+rate_limit_simple = { integer ~ "/" ~ integer }
+rate_limit_object = { "{" ~ rate_limit_fields ~ "}" }
+rate_limit_fields = { rate_limit_field ~ (WHITESPACE* ~ "," ~ WHITESPACE* ~ rate_limit_field)* ~ WHITESPACE* ~ ","? ~ WHITESPACE* }
+rate_limit_field = { identifier ~ WHITESPACE* ~ ":" ~ WHITESPACE* ~ integer ~ WHITESPACE* }
+
+// Parameter definition
+params_def = { "params" ~ "{" ~ param_def* ~ "}" }
+param_def = { identifier ~ ":" ~ type_expr ~ optional_marker? ~ default_value? }
+
+// Response definition
+response_def = { "response" ~ ":" ~ type_expr }
+
+// Resource definition
+resource_def = { "resource" ~ identifier ~ "{" ~ resource_content* ~ "}" }
+resource_content = {
+    type_def |
+    uri_def |
+    description_def |
+    property_def
+}
+
+// Template definition
+template_def = { "template" ~ identifier ~ "{" ~ template_content* ~ "}" }
+// Allow method attributes directly inside templates; prioritize method_content to avoid
+// misparsing entries like `rate_limit: 100/60` as a property_def
+template_content = { method_content | module_content }
+
+// Property definition
+property_def = { identifier ~ ":" ~ property_value }
+property_value = { integer | number | string | boolean | identifier }
+
+// Value types
+value = { integer | number | string | boolean | enum_reference | identifier }
+
+// Enum reference (supports EnumType.VALUE format)
+enum_reference = @{ identifier ~ ("." ~ identifier)+ }
+
+// Character definitions
+any = { '\u{0000}'..'\u{10FFFF}' }
+char = { any }
+
+// Basic lexical elements
+identifier = @{ ("_" | letter) ~ ("_" | letter | digit)* }
+string = @{ "\"" ~ (!"\"" ~ char)* ~ "\"" }
+integer = @{ ("-")? ~ digit+ }
+number = @{ ("-")? ~ digit+ ~ ("." ~ digit+)? }
+boolean = { "true" | "false" }
+
+// Comments
+comment = { single_line_comment | multi_line_comment }
+single_line_comment = { "//" ~ (!"\n" ~ char)* }
+multi_line_comment = { "/*" ~ (!"*/" ~ char)* ~ "*/" }
+
+// Whitespace
+WHITESPACE = _{ " " | "\t" | "\r" | "\n" | comment }
+
+// Character classes
+letter = { 'a'..'z' | 'A'..'Z' }
+digit = { '0'..'9' }

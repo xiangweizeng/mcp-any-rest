@@ -1,0 +1,112 @@
+// ZenTao Module Language (ZML) - Build Module
+
+module build {
+    version: "1.0.0"
+    description: "Build service for ZenTao system. Provides build management capabilities."
+    enabled: true
+    access_level: public
+
+    // Methods
+    method get_build {
+        description: "Get build details by build ID"
+        http_method: GET
+        uri: "builds/{buildId}"
+        access_level: public
+        rate_limit: 50/60
+
+        params {
+            buildId: integer       // Build ID (path parameter)
+        }
+
+        response: object{}
+    }
+
+    method create_build {
+        description: "Create a new build in ZenTao system"
+        http_method: POST
+        uri: "projects/{projectId}/builds"
+        access_level: private
+        rate_limit: 20/60
+
+        params {
+            projectId: integer          // Project ID (path parameter)
+            execution: integer          // Execution ID
+            product: integer            // Product ID
+            branch: integer?            // Branch ID (optional)
+            name: string                // Build name
+            builder: string             // Builder
+            date: string?               // Build date (optional)
+            scmPath: string?            // SCM path (optional)
+            filePath: string?           // File path (optional)
+            desc: string?               // Description (optional)
+        }
+
+        response: object{}
+    }
+
+    method update_build {
+        description: "Update build information in ZenTao system"
+        http_method: PUT
+        uri: "builds/{buildId}"
+        access_level: private
+        rate_limit: 20/60
+
+        params {
+            buildId: integer       // Build ID (path parameter)
+            name: string?               // Build name
+            scmPath: string?           // SCM path
+            filePath: string?          // File path
+            desc: string?               // Description
+            builder: string?            // Builder
+            date: string?               // Build date
+        }
+
+        response: object{}
+    }
+
+    method delete_build {
+        description: "Delete build from ZenTao system"
+        http_method: DELETE
+        uri: "builds/{buildId}"
+        access_level: private
+        rate_limit: 10/60
+
+        params {
+            buildId: integer       // Build ID (path parameter)
+        }
+
+        response: object{}
+    }
+
+    method get_project_builds {
+        description: "Get builds list for a project"
+        http_method: GET
+        uri: "projects/{projectId}/builds"
+        access_level: public
+        rate_limit: 50/60
+
+        params {
+            projectId: integer     // Project ID (path parameter)
+            page: integer = 1      // Page number (min 1)
+            limit: integer = 20    // Page size (1-100)
+        }
+
+        response: object{}
+    }
+
+    method get_execution_builds {
+        description: "Get builds list for an execution"
+        http_method: GET
+        uri: "executions/{executionId}/builds"
+        access_level: public
+        rate_limit: 50/60
+
+        params {
+            executionId: integer   // Execution ID (path parameter)
+            page: integer = 1      // Page number (min 1)
+            limit: integer = 20    // Page size (1-100)
+        }
+
+        response: object{}
+    }
+}

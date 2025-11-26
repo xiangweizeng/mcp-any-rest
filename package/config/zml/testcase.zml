@@ -1,0 +1,128 @@
+// ZenTao Module Language (ZML) - Test Case Module
+
+module testcase {
+    version: "1.0.0"
+    description: "Test case service for ZenTao system. Provides test case management capabilities."
+    enabled: true
+    access_level: public
+
+    type testcase_step {
+        desc: string                // Step description
+        expect: string              // Expected result
+    }
+
+    type testcase_step_result {
+        result: string              // Step result: n/a, fail, blocked, pass
+        real: string                // Actual result
+    }
+
+    // Methods
+    method get_product_testcases {
+        description: "Get test case list for a product from ZenTao system"
+        http_method: GET
+        uri: "products/{productId}/testcases"
+        access_level: public
+        rate_limit: 50/60
+
+        params {
+            productId: integer     // Product ID (path parameter)
+            page: integer?         // Page number
+            limit: integer?        // Limit per page
+        }
+
+        response: object{}
+    }
+
+    method get_testcase {
+        description: "Get test case details by test case ID"
+        http_method: GET
+        uri: "testcases/{testcaseId}"
+        access_level: public
+        rate_limit: 50/60
+
+        params {
+            testcaseId: integer   // Test case ID (path parameter)
+        }
+
+        response: object{}
+    }
+
+    method create_testcase {
+        description: "Create a new test case in ZenTao system"
+        http_method: POST
+        uri: "products/{productId}/testcases"
+        access_level: private
+        rate_limit: 20/60
+
+        params {
+            productId: integer     // Product ID (path parameter)
+            branch: integer?            // Branch ID
+            module: integer?            // Module ID
+            story: integer?             // Story ID
+            title: string               // Test case title
+            type: string                // Test case type
+            stage: string?              // Applicable stage
+            precondition: string?       // Precondition
+            pri: integer                // Priority
+            steps: array<testcase_step> // Test case steps
+            keywords: string?           // Keywords
+        }
+
+        response: object{}
+    }
+
+    method update_testcase {
+        description: "Update test case information in ZenTao system"
+        http_method: PUT
+        uri: "testcases/{testcaseId}"
+        access_level: private
+        rate_limit: 20/60
+
+        params {
+            testcaseId: integer   // Test case ID (path parameter)
+            branch: integer?            // Branch ID
+            module: integer?            // Module ID
+            story: integer?             // Story ID
+            title: string?              // Test case title
+            type: string?               // Test case type
+            stage: string?              // Applicable stage
+            precondition: string?       // Precondition
+            pri: integer?               // Priority
+            steps: array<testcase_step>? // Test case steps
+            keywords: string?           // Keywords
+        }
+
+        response: object{}
+    }
+
+    method delete_testcase {
+        description: "Delete test case by test case ID"
+        http_method: DELETE
+        uri: "testcases/{testcaseId}"
+        access_level: private
+        rate_limit: 10/60
+
+        params {
+            testcaseId: integer   // Test case ID (path parameter)
+        }
+
+        response: object{}
+    }
+
+    method execute_testcase {
+        description: "Execute test case and record test results in ZenTao system"
+        http_method: POST
+        uri: "testcases/{testcaseId}/results"
+        access_level: private
+        rate_limit: 20/60
+
+        params {
+            testcaseId: integer   // Test case ID (path parameter)
+            testtask: integer?          // Test task ID
+            version: integer?           // Version
+            steps: array<testcase_step_result> // Step results
+        }
+
+        response: object{}
+    }
+}

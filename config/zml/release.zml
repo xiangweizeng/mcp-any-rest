@@ -1,0 +1,37 @@
+// ZenTao Module Language (ZML) - Release Module
+
+module release {
+    version: "1.0.0"
+    description: "Release service for ZenTao system. Provides release management capabilities."
+    enabled: true
+    access_level: public
+
+    // Methods
+    method get_product_releases {
+        description: "Get product releases list from ZenTao system"
+        http_method: GET
+        uri: "products/{productId}/releases"
+        access_level: public
+        rate_limit: 50/60
+
+        params {
+            productId: integer     // Product ID (path parameter)
+        }
+
+        response: object{}
+    }
+
+    method get_project_releases {
+        description: "Get project releases list from ZenTao system"
+        http_method: GET
+        uri: "projects/{projectId}/releases"
+        access_level: public
+        rate_limit: 50/60
+
+        params {
+            projectId: integer     // Project ID (path parameter)
+        }
+
+        response: object{}
+    }
+}

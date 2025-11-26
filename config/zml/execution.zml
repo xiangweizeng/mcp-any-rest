@@ -1,0 +1,123 @@
+// ZenTao Module Language (ZML) - Execution Module
+
+module execution {
+    version: "1.0.0"
+    description: "Execution service for ZenTao system. Provides execution management capabilities."
+    enabled: true
+    access_level: public
+
+    enum ExecutionStatus{
+        
+    }
+
+    type update_execution_request {
+        project: integer            // Project ID
+        name: string                // Execution name
+        code: string                // Execution code
+        begin: string               // Planned start date
+        end: string                 // Planned end date
+        days: integer?              // Available work days
+        lifetime: string?           // Execution type (short | long | ops)
+        PO: string?                 // Product owner
+        PM: string?                 // Project manager
+        QD: string?                 // Quality director
+        RD: string?                 // Release director
+        teamMembers: array<string>? // Team members
+        products: array<string>?    // Products
+        plans: array<string>?       // Plans
+        desc: string?               // Execution description
+        acl: string?                // Access control (private | open)
+        whitelist: array<string>?   // Whitelist
+    }
+
+    // Methods
+    method get_executions {
+        description: "Get execution list for a project from ZenTao system"
+        http_method: GET
+        uri: "projects/{projectId}/executions"
+        access_level: public
+        rate_limit: 50/60
+
+        params {
+            projectId: integer     // Project ID (path parameter)
+            page: string?          // Page number
+            limit: string?         // Limit per page
+        }
+
+        response: object{}
+    }
+
+    method get_execution {
+        description: "Get execution details by execution ID"
+        http_method: GET
+        uri: "executions/{executionId}"
+        access_level: public
+        rate_limit: 50/60
+
+        params {
+            executionId: integer   // Execution ID (path parameter)
+        }
+
+        response: object{}
+    }
+
+    method create_execution {
+        description: "Create a new execution in ZenTao system"
+        http_method: POST
+        uri: "projects/{projectId}/executions"
+        access_level: private
+        rate_limit: 20/60
+
+        params {
+            projectId: integer          // Project ID (path parameter)
+            project: integer            // Project ID
+            name: string                // Execution name
+            code: string                // Execution code
+            begin: string               // Planned start date
+            end: string                 // Planned end date
+            days: integer?              // Available work days
+            lifetime: string?           // Execution type (short | long | ops)
+            PO: string?                 // Product owner
+            PM: string?                 // Project manager
+            QD: string?                 // Quality director
+            RD: string?                 // Release director
+            teamMembers: array<string>? // Team members
+            products: array<string>?    // Products
+            plans: array<string>?       // Plans
+            desc: string?               // Execution description
+            acl: string?                // Access control (private | open)
+            whitelist: array<string>?   // Whitelist
+        }
+
+        response: object{}
+    }
+
+    method update_execution {
+        description: "Update execution information in ZenTao system"
+        http_method: PUT
+        uri: "executions/{executionId}"
+        access_level: private
+        rate_limit: 20/60
+
+        params {
+            executionId: integer   // Execution ID (path parameter)
+            body: update_execution_request // Update execution request body
+        }
+
+        response: object{}
+    }
+
+    method delete_execution {
+        description: "Delete execution by execution ID"
+        http_method: DELETE
+        uri: "executions/{executionId}"
+        access_level: private
+        rate_limit: 10/60
+
+        params {
+            executionId: integer   // Execution ID (path parameter)
+        }
+
+        response: object{}
+    }
+}

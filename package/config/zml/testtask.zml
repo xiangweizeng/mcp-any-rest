@@ -1,0 +1,55 @@
+// ZenTao Module Language (ZML) - Test Task Module
+
+module testtask {
+    version: "1.0.0"
+    description: "Test task service for ZenTao system. Provides test task management capabilities."
+    enabled: true
+    access_level: public
+
+    // Methods
+    method get_testtask_list {
+        description: "Get test task list from ZenTao system"
+        http_method: GET
+        uri: "testtasks"
+        access_level: public
+        rate_limit: 50/60
+
+        params {
+            page: integer?         // Page number
+            limit: integer?        // Limit per page
+            order: string?         // Order
+            product: integer?      // Product ID
+            branch: integer?       // Branch ID
+        }
+
+        response: object{}
+    }
+
+    method get_testtask {
+        description: "Get test task details by test task ID"
+        http_method: GET
+        uri: "testtasks/{testtaskId}"
+        access_level: public
+        rate_limit: 50/60
+
+        params {
+            testtaskId: integer    // Test task ID (path parameter)
+        }
+
+        response: object{}  
+    }
+
+    method get_project_testtasks {
+        description: "Get test tasks for a project from ZenTao system"
+        http_method: GET
+        uri: "projects/{projectId}/testtasks"
+        access_level: public
+        rate_limit: 50/60
+
+        params {
+            projectId: integer     // Project ID (path parameter)
+        }
+
+        response: object{}  
+    }
+}

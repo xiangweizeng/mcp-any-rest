@@ -1,0 +1,127 @@
+// ZenTao Module Language (ZML) - User Module
+
+module user {
+    version: "1.0.0"
+    description: "User service for ZenTao system. Provides user management capabilities."
+    enabled: true
+    access_level: public
+    
+    // User browse type
+    enum UserBrowseType {
+        inside // Internal users
+        outside // External users
+    }
+    
+    // Method definition
+    method get_users {
+        description: "Get user list from ZenTao system"
+        http_method: GET
+        uri: "users"
+        access_level: public
+        rate_limit: 50/60
+        
+        params {
+            page: integer = 1         // Page number (required, minimum: 1)
+            limit: integer = 20       // Page size (required, range: 1-100)
+        }
+        
+        response: object{}
+    }
+    
+    method get_user {
+        description: "Get user details by user ID"
+        http_method: GET
+        uri: "users/{userId}"
+        access_level: public
+        rate_limit: 100/60
+        
+        params {
+            userId: integer           // User ID (path parameter)
+        }
+        
+        response: object{}
+    }
+    
+    method get_current_user {
+        description: "Get current user profile information"
+        http_method: GET
+        uri: "user"
+        access_level: public
+        rate_limit: 100/60
+        
+        response: object{}
+    }
+    
+    method create_user {
+        description: "Create a new user in ZenTao system"
+        http_method: POST
+        uri: "users"
+        access_level: private
+        rate_limit: 20/60
+        
+        params {
+            account: string               // Account name
+            password: string              // Password
+            realname: string?             // Real name（Optional）
+            gender: enum[f, m]?            // Gender（Optional）
+            visions: array<string>?        // Interface versions ["rnd", "lite"]，default is rnd（Optional）
+        }
+        
+        response: object{}
+    }
+    
+    method update_user {
+        description: "Update user information in ZenTao system"
+        http_method: PUT
+        uri: "users/{userId}"
+        access_level: private
+        rate_limit: 20/60
+        
+        params {
+            userId: integer           // User ID (path parameter)
+            dept: integer?                 // Department ID（Optional）
+            role: string?                  // Role（Optional）
+            mobile: string?                // Mobile number（Optional）
+            realname: string?               // Real name（Optional）
+            email: string?                 // Email address（Optional）
+            phone: string?                 // Phone number（Optional）  
+            nickname: string?              // nickname
+            avatar: string?                 // avatar
+        }
+        
+        response: object{}
+    }
+    
+    method delete_user {
+        description: "Delete user from ZenTao system"
+        http_method: DELETE
+        uri: "users/{userId}"
+        access_level: private
+        rate_limit: 10/60
+        
+        params {
+            userId: integer           // User ID (path parameter)
+        }
+        
+        response: object{}
+    }
+    
+    // Resource definitions
+    resource users {
+        type: collection
+        uri: "users"
+        description: "User collection resource"
+    }
+    
+    resource user {
+        type: entity
+        uri: "users/{user_id}"
+        description: "Single user resource"
+    }
+    
+    resource current_user {
+        type: entity
+        uri: "user"
+        description: "Current user resource"
+    }
+}

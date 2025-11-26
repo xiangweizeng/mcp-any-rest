@@ -1,0 +1,252 @@
+// ZenTao Module Language (ZML) - Task Module
+
+module task {
+    version: "1.0.0"
+    description: "Task service for ZenTao system. Provides task management capabilities."
+    enabled: true
+    access_level: public
+
+    enum TaskType{
+        design      // Design task
+        devel       // Development task
+        request     // Request task
+        test        // Test task
+        study       // Study task
+        discuss     // Discussion task
+        ui          // User interface task
+        affair      // Affair task
+        misc        // Miscellaneous task
+    }
+
+    type old_version_log_body {
+        id: array<integer>          // Log IDs
+        objectId: array<integer>    // Object IDs
+        dates: array<string>        // Dates
+        work: array<string>         // Work content
+        consumed: array<number>     // Consumed hours
+        left: array<number>         // Left hours
+        objectType: array<string>   // Object types
+    }
+
+    type new_version_log_body {
+        date: array<string>         // Dates
+        work: array<string>         // Work content
+        consumed: array<number>     // Consumed hours
+        left: array<number>         // Left hours
+    }
+
+    // Methods
+    method get_execution_tasks {
+        description: "Get execution tasks list from ZenTao system"
+        http_method: GET
+        uri: "executions/{executionId}/tasks"
+        access_level: public
+        rate_limit: 50/60
+
+        params {
+            executionId: integer   // Execution ID (path parameter)
+            page: integer?          // Page number
+            limit: integer?         // Limit
+            order: string?          // Order field, such asid_desc
+        }
+
+        response: object{}
+    }
+
+    method get_task {
+        description: "Get task details by task ID"
+        http_method: GET
+        uri: "tasks/{taskId}"
+        access_level: public
+        rate_limit: 50/60
+
+        params {
+            taskId: integer        // Task ID (path parameter)
+        }
+
+        response: object{}
+    }
+
+    method create_task {
+        description: "Create a new task in ZenTao system"
+        http_method: POST
+        uri: "executions/{executionId}/tasks"
+        access_level: private
+        rate_limit: 20/60
+
+        params {
+            executionId: integer        // Execution ID (path parameter)
+            module: integer?            // Module ID
+            story: integer?             // Story ID
+            fromBug: integer?           // From bug ID
+            name: string                // Task name
+            type: TaskType?             // Task type
+            assignedTo: string?         // Assigned to list
+            pri: integer?               // Priority
+            estimate: number?           // Estimated hours
+            estStarted: string          // Estimated start date
+            deadline: string            // Deadline (nullable string)
+            desc: string?               // Description
+            mailTo: array<string>?      // Mail to list
+        }
+
+        response: object{}
+    }
+
+    method update_task {
+        description: "Update task information in ZenTao system"
+        http_method: PUT
+        uri: "tasks/{taskId}"
+        access_level: private
+        rate_limit: 20/60
+
+        params {
+            taskId: integer             // Task ID (path parameter)
+            module: integer?            // Module ID
+            story: integer?             // Story ID
+            fromBug: integer?           // From bug ID
+            name: string?               // Task name
+            type: TaskType?             // Task type
+            assignedTo: string?         // Assigned to list
+            pri: integer?               // Priority
+            estimate: number?           // Estimated hours
+            estStarted: string?         // Estimated start date
+            deadline: string?           // Deadline
+            desc: string?               // Description
+            mailTo: array<string>?      // Mail to list
+        }
+
+        response: object{}
+    }
+
+    method delete_task {
+        description: "Delete task from ZenTao system"
+        http_method: DELETE
+        uri: "tasks/{taskId}"
+        access_level: private
+        rate_limit: 10/60
+
+        params {
+            taskId: integer        // Task ID (path parameter)
+        }
+
+        response: object{}
+    }
+
+    method close_task {
+        description: "Close task in ZenTao system"
+        http_method: POST
+        uri: "tasks/{taskId}/close"
+        access_level: private
+        rate_limit: 20/60
+
+        params {
+            taskId: integer        // Task ID (path parameter)
+            comment: string?       // Comment
+        }
+
+        response: object{}
+    }
+
+    method get_task_logs {
+        description: "Get task logs from ZenTao system"
+        http_method: GET
+        uri: "tasks/{taskId}/estimate"
+        access_level: public
+        rate_limit: 50/60
+
+        params {
+            taskId: integer        // Task ID (path parameter)
+        }
+
+        response: object{}
+    }
+
+    method restart_task {
+        description: "Restart task in ZenTao system"
+        http_method: POST
+        uri: "tasks/{taskId}/restart"
+        access_level: private
+        rate_limit: 20/60
+
+        params {
+            taskId: integer        // Task ID (path parameter)
+            assignedTo: string?    // Assigned to
+            realStarted: string?   // Real started date
+            consumed: number?      // Consumed hours
+            left: number           // Left hours
+            comment: string?       // Comment
+        }
+
+        response: object{}
+    }
+
+    method start_task {
+        description: "Start task in ZenTao system"
+        http_method: POST
+        uri: "tasks/{taskId}/start"
+        access_level: private
+        rate_limit: 20/60
+
+        params {
+            taskId: integer        // Task ID (path parameter)
+            assignedTo: string?    // Assigned to
+            realStarted: string?   // Real started date
+            left: number           // Left hours
+            comment: string?       // Comment
+        }
+
+        response: object{}
+    }
+
+    method finish_task {
+        description: "Finish task in ZenTao system"
+        http_method: POST
+        uri: "tasks/{taskId}/finish"
+        access_level: private
+        rate_limit: 20/60
+
+        params {
+            taskId: integer        // Task ID (path parameter)
+            assignedTo: string?    // Assigned to
+            currentConsumed: integer // Current consumed hours
+            realStarted: string?   // Real started date
+            finishedDate: string   // Finished date
+            comment: string?       // Comment
+        }
+
+        response: object{}
+    }
+
+    method pause_task {
+        description: "Pause task in ZenTao system"
+        http_method: POST
+        uri: "tasks/{taskId}/pause"
+        access_level: private
+        rate_limit: 20/60
+
+        params {
+            taskId: integer        // Task ID (path parameter)
+            comment: string?       // Comment
+        }
+
+        response: object{}
+    }
+
+    method add_task_logs {
+        description: "Add task logs to ZenTao system"
+        http_method: POST
+        uri: "tasks/{taskId}/estimate"
+        access_level: private
+        rate_limit: 20/60
+
+        params {
+            taskId: integer        // Task ID (path parameter)
+            version: string        // Version identifier: old or new
+            oldVersionBody: old_version_log_body? // Old version request body
+            newVersionBody: new_version_log_body? // New version request body
+        }
+
+        response: object{}
+    }
+}

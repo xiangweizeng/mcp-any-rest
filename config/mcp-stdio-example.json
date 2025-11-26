@@ -1,0 +1,16 @@
+{
+  "mcpServers": {
+    "mcp-any-rest": {
+      "command": "mcp-any-rest",
+      "args": [
+        "--config",
+        "config/",
+        "--transport",
+        "stdio"
+      ],
+      "env": {
+        "RUST_LOG": "info"
+      }
+    }
+  }
+}

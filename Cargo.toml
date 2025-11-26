@@ -1,0 +1,96 @@
+[package]
+name = "mcp-any-rest"
+version = "0.2.0"
+edition = "2021"
+
+[dependencies]
+rmcp = { version = "^0.8.1", features = ["server", "client", "transport-io", "transport-child-process", "transport-streamable-http-client-reqwest", "transport-sse-client-reqwest", "transport-streamable-http-server", "reqwest", "transport-streamable-http-client"] }
+rmcp-actix-web = "0.8.9"
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+serde_yaml = "0.9"
+reqwest = { version = "0.11", features = ["json", "stream"] }
+tokio = { version = "1.0", features = ["full"] }
+tokio-util = "0.7"
+anyhow = "1.0"
+log = "0.4"
+env_logger = "0.10"
+async-trait = "0.1"
+chrono = { version = "0.4", features = ["serde"] }
+axum = "0.7"
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter", "fmt"] }
+dotenvy = "0.15"
+schemars = "1.0"
+tempfile = "3.23.0"
+clap = { version = "4.4", features = ["derive"] }
+
+# ZML dependency
+pest = "2.7"
+pest_derive = "2.7"
+thiserror = "1.0"
+regex = "1.10"
+base64 = "0.22"
+futures = "0.3"
+url = "2.5"
+
+[dev-dependencies]
+tracing = "0.1"
+tracing-subscriber = "0.3"
+mockito = "1.2"
+
+[[bin]]
+name = "test_auth"
+path = "bin/zentao/test_auth.rs"
+
+[[bin]]
+name = "test_bug"
+path = "bin/zentao/test_bug.rs"
+
+[[bin]]
+name = "test_execution"
+path = "bin/zentao/test_execution.rs"
+
+[[bin]]
+name = "test_plan"
+path = "bin/zentao/test_plan.rs"
+
+[[bin]]
+name = "test_product"
+path = "bin/zentao/test_product.rs"
+
+[[bin]]
+name = "test_program"
+path = "bin/zentao/test_program.rs"
+
+[[bin]]
+name = "test_project"
+path = "bin/zentao/test_project.rs"
+
+[[bin]]
+name = "test_release"
+path = "bin/zentao/test_release.rs"
+
+[[bin]]
+name = "test_story"
+path = "bin/zentao/test_story.rs"
+
+[[bin]]
+name = "test_task"
+path = "bin/zentao/test_task.rs"
+
+[[bin]]
+name = "test_testcase"
+path = "bin/zentao/test_testcase.rs"
+
+[[bin]]
+name = "test_user"
+path = "bin/zentao/test_user.rs"
+
+[[bin]]
+name = "test_presets"
+path = "bin/test_presets.rs"
+
+[[bin]]
+name = "zml"
+path = "bin/zml.rs"

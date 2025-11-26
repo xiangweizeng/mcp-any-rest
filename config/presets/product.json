@@ -1,0 +1,972 @@
+{
+  "name": "Product",
+  "description": "Product Manager",
+  "default_access_level": "Internal",
+  "default_rate_limit": {
+    "requests_per_minute": 60,
+    "requests_per_hour": 1000,
+    "burst_capacity": 10
+  },
+  "modules": {
+    "product": {
+      "enabled": true,
+      "description": "Product service for ZenTao system. Provides product management capabilities.",
+      "methods": {
+        "update_product": {
+          "enabled": true,
+          "description": "Update product information in ZenTao system",
+          "access_level": "Private",
+          "rate_limit": {
+            "requests_per_minute": 20,
+            "requests_per_hour": 1200,
+            "burst_capacity": 10
+          }
+        },
+        "create_product": {
+          "enabled": true,
+          "description": "Create a new product in ZenTao system",
+          "access_level": "Private",
+          "rate_limit": {
+            "requests_per_minute": 20,
+            "requests_per_hour": 1200,
+            "burst_capacity": 10
+          }
+        },
+        "delete_product": {
+          "enabled": true,
+          "description": "Delete product from ZenTao system",
+          "access_level": "Private",
+          "rate_limit": {
+            "requests_per_minute": 10,
+            "requests_per_hour": 600,
+            "burst_capacity": 10
+          }
+        },
+        "get_product": {
+          "enabled": true,
+          "description": "Get product details by product ID",
+          "access_level": "Public",
+          "rate_limit": {
+            "requests_per_minute": 50,
+            "requests_per_hour": 3000,
+            "burst_capacity": 10
+          }
+        },
+        "get_product_list": {
+          "enabled": true,
+          "description": "Get product list from ZenTao system",
+          "access_level": "Public",
+          "rate_limit": {
+            "requests_per_minute": 50,
+            "requests_per_hour": 3000,
+            "burst_capacity": 10
+          }
+        }
+      },
+      "resources": null
+    },
+    "execution": {
+      "enabled": false,
+      "description": "Execution service for ZenTao system. Provides execution management capabilities.",
+      "methods": {
+        "update_execution": {
+          "enabled": true,
+          "description": "Update execution information in ZenTao system",
+          "access_level": "Private",
+          "rate_limit": {
+            "requests_per_minute": 20,
+            "requests_per_hour": 1200,
+            "burst_capacity": 10
+          }
+        },
+        "get_executions": {
+          "enabled": true,
+          "description": "Get execution list for a project from ZenTao system",
+          "access_level": "Public",
+          "rate_limit": {
+            "requests_per_minute": 50,
+            "requests_per_hour": 3000,
+            "burst_capacity": 10
+          }
+        },
+        "create_execution": {
+          "enabled": true,
+          "description": "Create a new execution in ZenTao system",
+          "access_level": "Private",
+          "rate_limit": {
+            "requests_per_minute": 20,
+            "requests_per_hour": 1200,
+            "burst_capacity": 10
+          }
+        },
+        "delete_execution": {
+          "enabled": true,
+          "description": "Delete execution by execution ID",
+          "access_level": "Private",
+          "rate_limit": {
+            "requests_per_minute": 10,
+            "requests_per_hour": 600,
+            "burst_capacity": 10
+          }
+        },
+        "get_execution": {
+          "enabled": true,
+          "description": "Get execution details by execution ID",
+          "access_level": "Public",
+          "rate_limit": {
+            "requests_per_minute": 50,
+            "requests_per_hour": 3000,
+            "burst_capacity": 10
+          }
+        }
+      },
+      "resources": null
+    },
+    "user": {
+      "enabled": true,
+      "description": "User service for ZenTao system. Provides user management capabilities.",
+      "methods": {
+        "get_users": {
+          "enabled": true,
+          "description": "Get user list from ZenTao system",
+          "access_level": "Public",
+          "rate_limit": {
+            "requests_per_minute": 50,
+            "requests_per_hour": 3000,
+            "burst_capacity": 10
+          }
+        },
+        "update_user": {
+          "enabled": false,
+          "description": "Update user information in ZenTao system",
+          "access_level": "Private",
+          "rate_limit": {
+            "requests_per_minute": 20,
+            "requests_per_hour": 1200,
+            "burst_capacity": 10
+          }
+        },
+        "get_user": {
+          "enabled": true,
+          "description": "Get user details by user ID",
+          "access_level": "Public",
+          "rate_limit": {
+            "requests_per_minute": 100,
+            "requests_per_hour": 6000,
+            "burst_capacity": 10
+          }
+        },
+        "delete_user": {
+          "enabled": false,
+          "description": "Delete user from ZenTao system",
+          "access_level": "Private",
+          "rate_limit": {
+            "requests_per_minute": 10,
+            "requests_per_hour": 600,
+            "burst_capacity": 10
+          }
+        },
+        "get_current_user": {
+          "enabled": true,
+          "description": "Get current user profile information",
+          "access_level": "Public",
+          "rate_limit": {
+            "requests_per_minute": 100,
+            "requests_per_hour": 6000,
+            "burst_capacity": 10
+          }
+        },
+        "create_user": {
+          "enabled": false,
+          "description": "Create a new user in ZenTao system",
+          "access_level": "Private",
+          "rate_limit": {
+            "requests_per_minute": 20,
+            "requests_per_hour": 1200,
+            "burst_capacity": 10
+          }
+        }
+      },
+      "resources": {
+        "user": {
+          "enabled": true,
+          "description": null,
+          "access_level": "Public",
+          "resource_type": "ApiEndpoint"
+        },
+        "current_user": {
+          "enabled": true,
+          "description": null,
+          "access_level": "Public",
+          "resource_type": "ApiEndpoint"
+        },
+        "users": {
+          "enabled": true,
+          "description": null,
+          "access_level": "Public",
+          "resource_type": "ApiEndpoint"
+        }
+      }
+    },
+    "testcase": {
+      "enabled": false,
+      "description": "Test case service for ZenTao system. Provides test case management capabilities.",
+      "methods": {
+        "execute_testcase": {
+          "enabled": true,
+          "description": "Execute test case and record test results in ZenTao system",
+          "access_level": "Private",
+          "rate_limit": {
+            "requests_per_minute": 20,
+            "requests_per_hour": 1200,
+            "burst_capacity": 10
+          }
+        },
+        "get_testcase": {
+          "enabled": true,
+          "description": "Get test case details by test case ID",
+          "access_level": "Public",
+          "rate_limit": {
+            "requests_per_minute": 50,
+            "requests_per_hour": 3000,
+            "burst_capacity": 10
+          }
+        },
+        "get_product_testcases": {
+          "enabled": true,
+          "description": "Get test case list for a product from ZenTao system",
+          "access_level": "Public",
+          "rate_limit": {
+            "requests_per_minute": 50,
+            "requests_per_hour": 3000,
+            "burst_capacity": 10
+          }
+        },
+        "create_testcase": {
+          "enabled": true,
+          "description": "Create a new test case in ZenTao system",
+          "access_level": "Private",
+          "rate_limit": {
+            "requests_per_minute": 20,
+            "requests_per_hour": 1200,
+            "burst_capacity": 10
+          }
+        },
+        "update_testcase": {
+          "enabled": true,
+          "description": "Update test case information in ZenTao system",
+          "access_level": "Private",
+          "rate_limit": {
+            "requests_per_minute": 20,
+            "requests_per_hour": 1200,
+            "burst_capacity": 10
+          }
+        },
+        "delete_testcase": {
+          "enabled": true,
+          "description": "Delete test case by test case ID",
+          "access_level": "Private",
+          "rate_limit": {
+            "requests_per_minute": 10,
+            "requests_per_hour": 600,
+            "burst_capacity": 10
+          }
+        }
+      },
+      "resources": null
+    },
+    "plan": {
+      "enabled": true,
+      "description": "Product plan service for ZenTao system. Provides product plan management capabilities.",
+      "methods": {
+        "get_plan": {
+          "enabled": true,
+          "description": "Get product plan details by plan ID",
+          "access_level": "Public",
+          "rate_limit": {
+            "requests_per_minute": 50,
+            "requests_per_hour": 3000,
+            "burst_capacity": 10
+          }
+        },
+        "unlink_bugs": {
+          "enabled": true,
+          "description": "Unlink bugs from a product plan",
+          "access_level": "Private",
+          "rate_limit": {
+            "requests_per_minute": 20,
+            "requests_per_hour": 1200,
+            "burst_capacity": 10
+          }
+        },
+        "link_bugs": {
+          "enabled": true,
+          "description": "Link bugs to a product plan",
+          "access_level": "Private",
+          "rate_limit": {
+            "requests_per_minute": 20,
+            "requests_per_hour": 1200,
+            "burst_capacity": 10
+          }
+        },
+        "delete_plan": {
+          "enabled": true,
+          "description": "Delete a product plan",
+          "access_level": "Private",
+          "rate_limit": {
+            "requests_per_minute": 10,
+            "requests_per_hour": 600,
+            "burst_capacity": 10
+          }
+        },
+        "unlink_stories": {
+          "enabled": true,
+          "description": "Unlink stories from a product plan",
+          "access_level": "Private",
+          "rate_limit": {
+            "requests_per_minute": 20,
+            "requests_per_hour": 1200,
+            "burst_capacity": 10
+          }
+        },
+        "create_plan": {
+          "enabled": true,
+          "description": "Create a new product plan",
+          "access_level": "Private",
+          "rate_limit": {
+            "requests_per_minute": 20,
+            "requests_per_hour": 1200,
+            "burst_capacity": 10
+          }
+        },
+        "get_plans": {
+          "enabled": true,
+          "description": "Get product plan list from ZenTao system",
+          "access_level": "Public",
+          "rate_limit": {
+            "requests_per_minute": 50,
+            "requests_per_hour": 3000,
+            "burst_capacity": 10
+          }
+        },
+        "update_plan": {
+          "enabled": true,
+          "description": "Update an existing product plan",
+          "access_level": "Private",
+          "rate_limit": {
+            "requests_per_minute": 20,
+            "requests_per_hour": 1200,
+            "burst_capacity": 10
+          }
+        },
+        "link_stories": {
+          "enabled": true,
+          "description": "Link stories to a product plan",
+          "access_level": "Private",
+          "rate_limit": {
+            "requests_per_minute": 20,
+            "requests_per_hour": 1200,
+            "burst_capacity": 10
+          }
+        }
+      },
+      "resources": null
+    },
+    "testtask": {
+      "enabled": false,
+      "description": "Test task service for ZenTao system. Provides test task management capabilities.",
+      "methods": {
+        "get_testtask_list": {
+          "enabled": true,
+          "description": "Get test task list from ZenTao system",
+          "access_level": "Public",
+          "rate_limit": {
+            "requests_per_minute": 50,
+            "requests_per_hour": 3000,
+            "burst_capacity": 10
+          }
+        },
+        "get_project_testtasks": {
+          "enabled": true,
+          "description": "Get test tasks for a project from ZenTao system",
+          "access_level": "Public",
+          "rate_limit": {
+            "requests_per_minute": 50,
+            "requests_per_hour": 3000,
+            "burst_capacity": 10
+          }
+        },
+        "get_testtask": {
+          "enabled": true,
+          "description": "Get test task details by test task ID",
+          "access_level": "Public",
+          "rate_limit": {
+            "requests_per_minute": 50,
+            "requests_per_hour": 3000,
+            "burst_capacity": 10
+          }
+        }
+      },
+      "resources": null
+    },
+    "build": {
+      "enabled": false,
+      "description": "Build service for ZenTao system. Provides build management capabilities.",
+      "methods": {
+        "get_execution_builds": {
+          "enabled": true,
+          "description": "Get builds list for an execution",
+          "access_level": "Public",
+          "rate_limit": {
+            "requests_per_minute": 50,
+            "requests_per_hour": 3000,
+            "burst_capacity": 10
+          }
+        },
+        "create_build": {
+          "enabled": true,
+          "description": "Create a new build in ZenTao system",
+          "access_level": "Private",
+          "rate_limit": {
+            "requests_per_minute": 20,
+            "requests_per_hour": 1200,
+            "burst_capacity": 10
+          }
+        },
+        "get_build": {
+          "enabled": true,
+          "description": "Get build details by build ID",
+          "access_level": "Public",
+          "rate_limit": {
+            "requests_per_minute": 50,
+            "requests_per_hour": 3000,
+            "burst_capacity": 10
+          }
+        },
+        "get_project_builds": {
+          "enabled": true,
+          "description": "Get builds list for a project",
+          "access_level": "Public",
+          "rate_limit": {
+            "requests_per_minute": 50,
+            "requests_per_hour": 3000,
+            "burst_capacity": 10
+          }
+        },
+        "delete_build": {
+          "enabled": true,
+          "description": "Delete build from ZenTao system",
+          "access_level": "Private",
+          "rate_limit": {
+            "requests_per_minute": 10,
+            "requests_per_hour": 600,
+            "burst_capacity": 10
+          }
+        },
+        "update_build": {
+          "enabled": true,
+          "description": "Update build information in ZenTao system",
+          "access_level": "Private",
+          "rate_limit": {
+            "requests_per_minute": 20,
+            "requests_per_hour": 1200,
+            "burst_capacity": 10
+          }
+        }
+      },
+      "resources": null
+    },
+    "bug": {
+      "enabled": false,
+      "description": "Bug service for ZenTao system. Provides bug management capabilities.",
+      "methods": {
+        "get_product_bugs": {
+          "enabled": true,
+          "description": "Get product bug list from ZenTao system",
+          "access_level": "Public",
+          "rate_limit": {
+            "requests_per_minute": 50,
+            "requests_per_hour": 3000,
+            "burst_capacity": 10
+          }
+        },
+        "get_bug": {
+          "enabled": true,
+          "description": "Get bug details by bug ID",
+          "access_level": "Public",
+          "rate_limit": {
+            "requests_per_minute": 100,
+            "requests_per_hour": 6000,
+            "burst_capacity": 10
+          }
+        },
+        "create_bug": {
+          "enabled": true,
+          "description": "Create a new bug in ZenTao system",
+          "access_level": "Private",
+          "rate_limit": {
+            "requests_per_minute": 20,
+            "requests_per_hour": 1200,
+            "burst_capacity": 10
+          }
+        },
+        "activate_bug": {
+          "enabled": true,
+          "description": "Activate bug in ZenTao system",
+          "access_level": "Private",
+          "rate_limit": {
+            "requests_per_minute": 20,
+            "requests_per_hour": 1200,
+            "burst_capacity": 10
+          }
+        },
+        "delete_bug": {
+          "enabled": true,
+          "description": "Delete bug from ZenTao system",
+          "access_level": "Private",
+          "rate_limit": {
+            "requests_per_minute": 10,
+            "requests_per_hour": 600,
+            "burst_capacity": 10
+          }
+        },
+        "close_bug": {
+          "enabled": true,
+          "description": "Close bug in ZenTao system",
+          "access_level": "Private",
+          "rate_limit": {
+            "requests_per_minute": 20,
+            "requests_per_hour": 1200,
+            "burst_capacity": 10
+          }
+        },
+        "confirm_bug": {
+          "enabled": true,
+          "description": "Confirm bug in ZenTao system",
+          "access_level": "Private",
+          "rate_limit": {
+            "requests_per_minute": 20,
+            "requests_per_hour": 1200,
+            "burst_capacity": 10
+          }
+        },
+        "update_bug": {
+          "enabled": true,
+          "description": "Update bug information in ZenTao system",
+          "access_level": "Private",
+          "rate_limit": {
+            "requests_per_minute": 20,
+            "requests_per_hour": 1200,
+            "burst_capacity": 10
+          }
+        },
+        "resolve_bug": {
+          "enabled": true,
+          "description": "Resolve bug in ZenTao system",
+          "access_level": "Private",
+          "rate_limit": {
+            "requests_per_minute": 20,
+            "requests_per_hour": 1200,
+            "burst_capacity": 10
+          }
+        }
+      },
+      "resources": null
+    },
+    "program": {
+      "enabled": true,
+      "description": "Program service for ZenTao system. Provides program management capabilities.",
+      "methods": {
+        "get_program_details": {
+          "enabled": true,
+          "description": "Get program details by program ID",
+          "access_level": "Public",
+          "rate_limit": {
+            "requests_per_minute": 50,
+            "requests_per_hour": 3000,
+            "burst_capacity": 10
+          }
+        },
+        "delete_program": {
+          "enabled": false,
+          "description": "Delete program from ZenTao system",
+          "access_level": "Private",
+          "rate_limit": {
+            "requests_per_minute": 10,
+            "requests_per_hour": 600,
+            "burst_capacity": 10
+          }
+        },
+        "get_program_list": {
+          "enabled": true,
+          "description": "Get program list from ZenTao system",
+          "access_level": "Public",
+          "rate_limit": {
+            "requests_per_minute": 50,
+            "requests_per_hour": 3000,
+            "burst_capacity": 10
+          }
+        },
+        "create_program": {
+          "enabled": false,
+          "description": "Create a new program in ZenTao system",
+          "access_level": "Private",
+          "rate_limit": {
+            "requests_per_minute": 20,
+            "requests_per_hour": 1200,
+            "burst_capacity": 10
+          }
+        },
+        "update_program": {
+          "enabled": false,
+          "description": "Update program information in ZenTao system",
+          "access_level": "Private",
+          "rate_limit": {
+            "requests_per_minute": 20,
+            "requests_per_hour": 1200,
+            "burst_capacity": 10
+          }
+        }
+      },
+      "resources": null
+    },
+    "task": {
+      "enabled": false,
+      "description": "Task service for ZenTao system. Provides task management capabilities.",
+      "methods": {
+        "close_task": {
+          "enabled": true,
+          "description": "Close task in ZenTao system",
+          "access_level": "Private",
+          "rate_limit": {
+            "requests_per_minute": 20,
+            "requests_per_hour": 1200,
+            "burst_capacity": 10
+          }
+        },
+        "create_task": {
+          "enabled": true,
+          "description": "Create a new task in ZenTao system",
+          "access_level": "Private",
+          "rate_limit": {
+            "requests_per_minute": 20,
+            "requests_per_hour": 1200,
+            "burst_capacity": 10
+          }
+        },
+        "finish_task": {
+          "enabled": true,
+          "description": "Finish task in ZenTao system",
+          "access_level": "Private",
+          "rate_limit": {
+            "requests_per_minute": 20,
+            "requests_per_hour": 1200,
+            "burst_capacity": 10
+          }
+        },
+        "add_task_logs": {
+          "enabled": true,
+          "description": "Add task logs to ZenTao system",
+          "access_level": "Private",
+          "rate_limit": {
+            "requests_per_minute": 20,
+            "requests_per_hour": 1200,
+            "burst_capacity": 10
+          }
+        },
+        "restart_task": {
+          "enabled": true,
+          "description": "Restart task in ZenTao system",
+          "access_level": "Private",
+          "rate_limit": {
+            "requests_per_minute": 20,
+            "requests_per_hour": 1200,
+            "burst_capacity": 10
+          }
+        },
+        "get_execution_tasks": {
+          "enabled": true,
+          "description": "Get execution tasks list from ZenTao system",
+          "access_level": "Public",
+          "rate_limit": {
+            "requests_per_minute": 50,
+            "requests_per_hour": 3000,
+            "burst_capacity": 10
+          }
+        },
+        "get_task_logs": {
+          "enabled": true,
+          "description": "Get task logs from ZenTao system",
+          "access_level": "Public",
+          "rate_limit": {
+            "requests_per_minute": 50,
+            "requests_per_hour": 3000,
+            "burst_capacity": 10
+          }
+        },
+        "update_task": {
+          "enabled": true,
+          "description": "Update task information in ZenTao system",
+          "access_level": "Private",
+          "rate_limit": {
+            "requests_per_minute": 20,
+            "requests_per_hour": 1200,
+            "burst_capacity": 10
+          }
+        },
+        "delete_task": {
+          "enabled": true,
+          "description": "Delete task from ZenTao system",
+          "access_level": "Private",
+          "rate_limit": {
+            "requests_per_minute": 10,
+            "requests_per_hour": 600,
+            "burst_capacity": 10
+          }
+        },
+        "get_task": {
+          "enabled": true,
+          "description": "Get task details by task ID",
+          "access_level": "Public",
+          "rate_limit": {
+            "requests_per_minute": 50,
+            "requests_per_hour": 3000,
+            "burst_capacity": 10
+          }
+        },
+        "start_task": {
+          "enabled": true,
+          "description": "Start task in ZenTao system",
+          "access_level": "Private",
+          "rate_limit": {
+            "requests_per_minute": 20,
+            "requests_per_hour": 1200,
+            "burst_capacity": 10
+          }
+        },
+        "pause_task": {
+          "enabled": true,
+          "description": "Pause task in ZenTao system",
+          "access_level": "Private",
+          "rate_limit": {
+            "requests_per_minute": 20,
+            "requests_per_hour": 1200,
+            "burst_capacity": 10
+          }
+        }
+      },
+      "resources": null
+    },
+    "project": {
+      "enabled": false,
+      "description": "Project service for ZenTao system. Provides project management capabilities.",
+      "methods": {
+        "get_projects": {
+          "enabled": true,
+          "description": "Get project list from ZenTao system",
+          "access_level": "Public",
+          "rate_limit": {
+            "requests_per_minute": 50,
+            "requests_per_hour": 3000,
+            "burst_capacity": 10
+          }
+        },
+        "get_project": {
+          "enabled": true,
+          "description": "Get project details by project ID",
+          "access_level": "Public",
+          "rate_limit": {
+            "requests_per_minute": 50,
+            "requests_per_hour": 3000,
+            "burst_capacity": 10
+          }
+        },
+        "delete_project": {
+          "enabled": true,
+          "description": "Delete project from ZenTao system",
+          "access_level": "Private",
+          "rate_limit": {
+            "requests_per_minute": 10,
+            "requests_per_hour": 600,
+            "burst_capacity": 10
+          }
+        },
+        "update_project": {
+          "enabled": true,
+          "description": "Update project information in ZenTao system",
+          "access_level": "Private",
+          "rate_limit": {
+            "requests_per_minute": 20,
+            "requests_per_hour": 1200,
+            "burst_capacity": 10
+          }
+        },
+        "create_project": {
+          "enabled": true,
+          "description": "Create a new project in ZenTao system",
+          "access_level": "Private",
+          "rate_limit": {
+            "requests_per_minute": 20,
+            "requests_per_hour": 1200,
+            "burst_capacity": 10
+          }
+        }
+      },
+      "resources": null
+    },
+    "release": {
+      "enabled": false,
+      "description": "Release service for ZenTao system. Provides release management capabilities.",
+      "methods": {
+        "get_project_releases": {
+          "enabled": true,
+          "description": "Get project releases list from ZenTao system",
+          "access_level": "Public",
+          "rate_limit": {
+            "requests_per_minute": 50,
+            "requests_per_hour": 3000,
+            "burst_capacity": 10
+          }
+        },
+        "get_product_releases": {
+          "enabled": true,
+          "description": "Get product releases list from ZenTao system",
+          "access_level": "Public",
+          "rate_limit": {
+            "requests_per_minute": 50,
+            "requests_per_hour": 3000,
+            "burst_capacity": 10
+          }
+        }
+      },
+      "resources": null
+    },
+    "story": {
+      "enabled": true,
+      "description": "Story service for ZenTao system. Provides story management capabilities.",
+      "methods": {
+        "get_product_stories": {
+          "enabled": true,
+          "description": "Get story list for a product",
+          "access_level": "Public",
+          "rate_limit": {
+            "requests_per_minute": 50,
+            "requests_per_hour": 3000,
+            "burst_capacity": 10
+          }
+        },
+        "change_story": {
+          "enabled": true,
+          "description": "Change story information",
+          "access_level": "Private",
+          "rate_limit": {
+            "requests_per_minute": 20,
+            "requests_per_hour": 1200,
+            "burst_capacity": 10
+          }
+        },
+        "commit_story": {
+          "enabled": true,
+          "description": "Commit a story",
+          "access_level": "Private",
+          "rate_limit": {
+            "requests_per_minute": 20,
+            "requests_per_hour": 1200,
+            "burst_capacity": 10
+          }
+        },
+        "get_story": {
+          "enabled": true,
+          "description": "Get story details by story ID",
+          "access_level": "Public",
+          "rate_limit": {
+            "requests_per_minute": 50,
+            "requests_per_hour": 3000,
+            "burst_capacity": 10
+          }
+        },
+        "get_execution_stories": {
+          "enabled": true,
+          "description": "Get story list for an execution",
+          "access_level": "Public",
+          "rate_limit": {
+            "requests_per_minute": 50,
+            "requests_per_hour": 3000,
+            "burst_capacity": 10
+          }
+        },
+        "delete_story": {
+          "enabled": true,
+          "description": "Delete story from ZenTao system",
+          "access_level": "Private",
+          "rate_limit": {
+            "requests_per_minute": 10,
+            "requests_per_hour": 600,
+            "burst_capacity": 10
+          }
+        },
+        "get_project_stories": {
+          "enabled": true,
+          "description": "Get story list for a project",
+          "access_level": "Public",
+          "rate_limit": {
+            "requests_per_minute": 50,
+            "requests_per_hour": 3000,
+            "burst_capacity": 10
+          }
+        },
+        "active_story": {
+          "enabled": true,
+          "description": "Active a story",
+          "access_level": "Private",
+          "rate_limit": {
+            "requests_per_minute": 20,
+            "requests_per_hour": 1200,
+            "burst_capacity": 10
+          }
+        },
+        "update_story_other_fields": {
+          "enabled": true,
+          "description": "Update other fields of a story",
+          "access_level": "Private",
+          "rate_limit": {
+            "requests_per_minute": 20,
+            "requests_per_hour": 1200,
+            "burst_capacity": 10
+          }
+        },
+        "create_story": {
+          "enabled": true,
+          "description": "Create a new story in ZenTao system",
+          "access_level": "Private",
+          "rate_limit": {
+            "requests_per_minute": 20,
+            "requests_per_hour": 1200,
+            "burst_capacity": 10
+          }
+        },
+        "assign_story": {
+          "enabled": true,
+          "description": "Assign a story to a specific user",
+          "access_level": "Private",
+          "rate_limit": {
+            "requests_per_minute": 20,
+            "requests_per_hour": 1200,
+            "burst_capacity": 10
+          }
+        },
+        "close_story": {
+          "enabled": true,
+          "description": "Close a story in ZenTao system",
+          "access_level": "Private",
+          "rate_limit": {
+            "requests_per_minute": 20,
+            "requests_per_hour": 1200,
+            "burst_capacity": 10
+          }
+        }
+      },
+      "resources": null
+    }
+  }
+}

@@ -1,0 +1,217 @@
+// ZenTao Module Language (ZML) - Bug Module
+
+module bug {
+    version: "1.0.0"
+    description: "Bug service for ZenTao system. Provides bug management capabilities."
+    enabled: true
+    access_level: public
+
+    // Enums (for reference; responses use string fields)
+    enum BugType {
+        codeerror                   // Code error
+        config                      // Configuration related
+        install                     // Installation deployment
+        security                    // Security related
+        performance                 // Performance issue
+        standard                    // Standard specification
+        automation                  // Test script
+        designdefect                // Design defect
+        others                      // Others
+    }
+
+    enum BugStatus {
+        active                      // Active
+        resolved                    // Resolved
+        closed                      // Closed
+        confirmed                   // Confirmed
+    }
+
+    enum BugResolution {
+        bydesign                    // By design
+        duplicate                   // Duplicate
+        external                    // External
+        fixed                       // Fixed
+        notrepro                    // Not reproducible
+        postponed                   // Postponed
+        willnotfix                  // Will not fix
+        tostory                     // To story
+    }
+
+    
+    // Methods
+    method get_product_bugs {
+        description: "Get product bug list from ZenTao system"
+        http_method: GET
+        uri: "products/{productId}/bugs"
+        access_level: public
+        rate_limit: 50/60
+
+        params {
+            productId: integer      // Product ID (path parameter)
+            page: integer = 1       // Page number (min 1)
+            limit: integer = 20     // Page size (1-100)
+        }
+
+        response: object{}
+    }
+
+    method get_bug {
+        description: "Get bug details by bug ID"
+        http_method: GET
+        uri: "bugs/{bugId}"
+        access_level: public
+        rate_limit: 100/60
+
+        params {
+            bugId: integer          // Bug ID (path parameter)
+        }
+
+        response: object{}
+    }
+
+    method create_bug {
+        description: "Create a new bug in ZenTao system"
+        http_method: POST
+        uri: "products/{productId}/bugs"
+        access_level: private
+        rate_limit: 20/60
+
+        params {
+            productId: integer          // Product ID (path parameter)
+            branch: integer?            // Branch ID (optional)
+            module: integer?            // Module ID (optional)
+            execution: integer?         // Execution ID (optional)
+            title: string               // Bug title
+            keywords: string?           // Keywords (optional)
+            severity: integer           // Severity level
+            pri: integer                // Priority level
+            type: BugType               // Bug type
+            os: string?                 // Operating system (optional)
+            browser: string?            // Browser (optional)
+            steps: string?              // Reproduction steps (optional)
+            task: integer?              // Related task ID (optional)
+            story: integer?             // Related story ID (optional)
+            deadline: string?           // Deadline (optional)
+            assignedTo: string?         // Assigned to (may be string)
+            openedBuild: array<string>? // Affected versions (optional)
+        }
+
+        response: object{}
+    }
+
+    method update_bug {
+        description: "Update bug information in ZenTao system"
+        http_method: PUT
+        uri: "bugs/{bugId}"
+        access_level: private
+        rate_limit: 20/60
+
+        params {
+            bugId: integer          // Bug ID (path parameter)
+            branch: integer?            // Branch ID (optional)
+            module: integer?            // Module ID (optional)
+            execution: integer?         // Execution ID (optional)
+            title: string?               // Bug title
+            keywords: string?           // Keywords (optional)
+            severity: integer?           // Severity level
+            pri: integer?               // Priority level
+            type: BugType?              // Bug type
+            os: string?                 // Operating system (optional)
+            browser: string?            // Browser (optional)
+            steps: string?              // Reproduction steps (optional)
+            task: integer?              // Related task ID (optional)
+            story: integer?             // Related story ID (optional)
+            deadline: string?           // Deadline (optional)
+            openedBuild: array<string>? // Affected versions (optional)
+        }
+
+        response: object{}
+    }
+
+    method delete_bug {
+        description: "Delete bug from ZenTao system"
+        http_method: DELETE
+        uri: "bugs/{bugId}"
+        access_level: private
+        rate_limit: 10/60
+
+        params {
+            bugId: integer          // Bug ID (path parameter)
+        }
+
+        response: object{}
+    }
+
+    method confirm_bug {
+        description: "Confirm bug in ZenTao system"
+        http_method: POST
+        uri: "bugs/{bugId}/confirm"
+        access_level: private
+        rate_limit: 20/60
+
+        params {
+            bugId: integer          // Bug ID (path parameter)
+            assignedTo: string?     // Assigned to
+            bugType: string?        // Bug type
+            mailto: array<string>?  // Mail to
+            comment: string?        // Comment
+            pri: integer?           // Priority
+        }
+
+        response: object{}
+    }
+
+    method resolve_bug {
+        description: "Resolve bug in ZenTao system"
+        http_method: POST
+        uri: "bugs/{bugId}/resolve"
+        access_level: private
+        rate_limit: 20/60
+
+        params {
+            bugId: integer          // Bug ID (path parameter)
+            resolution: ResolutionType?      // Resolution type
+            duplicateBug: integer?  // Duplicate bug ID
+            resolvedBuild: string?  // Resolved build
+            assignedTo: string?     // Assigned to
+            bugType: string?        // Bug type
+            mailto: array<string>?  // Mail to
+            comment: string?        // Comment
+            pri: integer?           // Priority
+        }
+
+        response: object{}
+    }
+
+    method close_bug {
+        description: "Close bug in ZenTao system"
+        http_method: POST
+        uri: "bugs/{bugId}/close"
+        access_level: private
+        rate_limit: 20/60
+
+        params {
+            bugId: integer          // Bug ID (path parameter)
+            comment: string?        // Comment
+        }
+
+        response: object{}
+    }
+
+    method activate_bug {
+        description: "Activate bug in ZenTao system"
+        http_method: POST
+        uri: "bugs/{bugId}/active"
+        access_level: private
+        rate_limit: 20/60
+
+        params {
+            bugId: integer              // Bug ID (path parameter)
+            assignedTo: string?         // Assigned to
+            openedBuild: array<string>? // Affected versions
+            comment: string?            // Comment
+        }
+
+        response: object{}
+    }
+}

@@ -1,0 +1,45 @@
+{
+  "presets": [
+    {
+      "id": "full",
+      "name": "Full",
+      "description": "Enable all modules and features",
+      "file": "full",
+      "enabled": true,
+      "priority": 1
+    },
+    {
+      "id": "product",
+      "name": "Product",
+      "description": "Product Manager",
+      "file": "product",
+      "enabled": true,
+      "priority": 2
+    },
+    {
+      "id": "project",
+      "name": "Project",
+      "description": "Project Manager",
+      "file": "project",
+      "enabled": true,
+      "priority": 3
+    },
+    {
+      "id": "execution",
+      "name": "Execution",
+      "description": "Execution manager",
+      "file": "execution",
+      "enabled": true,
+      "priority": 4
+    },
+    {
+      "id": "task",
+      "name": "Task",
+      "description": "Task manager",
+      "file": "task",
+      "enabled": true,
+      "priority": 5
+    }
+  ],
+  "default_preset": "full"
+}

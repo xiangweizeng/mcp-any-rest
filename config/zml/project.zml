@@ -1,0 +1,100 @@
+// ZenTao Module Language (ZML) - Project Module
+
+module project {
+    version: "1.0.0"
+    description: "Project service for ZenTao system. Provides project management capabilities."
+    enabled: true
+    access_level: public
+
+    // Methods
+    method get_projects {
+        description: "Get project list from ZenTao system"
+        http_method: GET
+        uri: "projects"
+        access_level: public
+        rate_limit: 50/60
+
+        params {
+            page: string?          // Page number
+            limit: string?         // Items per page
+        }
+
+        response: object{}
+    }
+
+    method get_project {
+        description: "Get project details by project ID"
+        http_method: GET
+        uri: "projects/{projectId}"
+        access_level: public
+        rate_limit: 50/60
+
+        params {
+            projectId: integer     // Project ID (path parameter)
+        }
+
+        response: object{}
+    }
+
+    method create_project {
+        description: "Create a new project in ZenTao system"
+        http_method: POST
+        uri: "projects"
+        access_level: private
+        rate_limit: 20/60
+
+        params {
+            name: string           // Project name
+            begin: string          // Planned start date
+            end: string            // Planned end date
+            products: array<integer> // Associated products
+            code: string           // Project code
+            model: string?         // Project model (default: scrum)
+            multiple: string?      // Multiple (on | off)
+            parent: integer?       // Parent program (default: 0)
+            plans: array<integer>? // Associated plans
+        }
+
+        response: object{}
+    }
+
+    method update_project {
+        description: "Update project information in ZenTao system"
+        http_method: PUT
+        uri: "projects/{projectId}"
+        access_level: private
+        rate_limit: 20/60
+
+        params {
+            projectId: integer     // Project ID (path parameter)
+            name: string?          // Project name
+            code: string?          // Project code
+            parent: integer?       // Parent program
+            PM: integer?           // Project manager (PM)
+            budget: integer?       // Budget amount
+            budgetUnit: string?    // Budget currency (CNY | USD)
+            days: integer?         // Available working days
+            desc: string?          // Project description
+            acl: string?           // Access control (open public | private)
+            whitelist: array<string>? // Whitelist
+            auth: string?          // Permission control (extend inherit | reset redefine)
+            plans: array<integer>? // Associated plans
+        }
+
+        response: object{}
+    }
+
+    method delete_project {
+        description: "Delete project from ZenTao system"
+        http_method: DELETE
+        uri: "projects/{projectId}"
+        access_level: private
+        rate_limit: 10/60
+
+        params {
+            projectId: integer     // Project ID (path parameter)
+        }
+
+        response: object{}
+    }
+}

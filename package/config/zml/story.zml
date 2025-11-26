@@ -1,0 +1,275 @@
+// ZenTao Module Language (ZML) - Story Module
+
+module story {
+    version: "1.0.0"
+    description: "Story service for ZenTao system. Provides story management capabilities."
+    enabled: true
+    access_level: public
+
+    // Basic types
+    type story_user {
+        id: integer                 // User ID
+        account: string             // User account
+        avatar: string?             // User avatar URL (optional)
+        realname: string            // User real name
+    }
+
+    // Enums (for reference; responses use string fields)
+    enum StorySource {
+        customer                    // Customer story source
+        user                        // User story source
+        po                          // Product owner story source
+        market                      // Market story source
+    }
+
+    enum StoryCategory {
+        feature                     // Feature story category
+        interface                   // Interface story category
+        performance                 // Performance story category
+        safe                        // Safe story category
+        experience                  // Experience story category
+        improve                     // Improve story category
+        other                       // Other story category
+    }
+
+    enum StoryStage {
+        wait                        // Wait stage
+        planned                     // Planned stage
+        projected                   // Projected stage
+        developing                  // Developing stage
+        developed                   // Developed stage
+        testing                     // Testing stage
+        tested                      // Tested stage
+        verified                    // Verified stage
+        released                    // Released stage
+        closed                      // Closed stage
+    }
+
+    enum StoryStatus {
+        draft                       // Draft status
+        reviewing                   // Reviewing status
+        active                      // Active status
+        closed                      // Closed status
+        changed                     // Changed status
+    }
+
+    // Methods
+    method get_story {
+        description: "Get story details by story ID"
+        http_method: GET
+        uri: "stories/{storyId}"
+        access_level: public
+        rate_limit: 50/60
+
+        params {
+            storyId: integer       // Story ID (path parameter)
+        }
+
+        response: object{}
+    }
+
+    method create_story {
+        description: "Create a new story in ZenTao system"
+        http_method: POST
+        uri: "stories"
+        access_level: private
+        rate_limit: 20/60
+
+        // Using flat body parameters consistent with API builder
+        params {
+            title: string           // Story title
+            product: integer        // Product ID
+            project: integer?       // Project ID
+            parent: integer?        // Parent story ID
+            pri: integer?           // Priority
+            category: StoryCategory // Category
+            spec: string?           // Specification
+            verify: string?         // Verification criteria
+            source: StorySource?    // Source
+            sourceNote: string?     // Source note
+            estimate: number?       // Estimate hours
+            keywords: string?       // Keywords
+            assignedTo: string?     // Assigned to
+            reviewer: array<string>? // Reviewer accounts
+        }
+
+        response: object{}
+    }
+
+    method update_story_other_fields {
+        description: "Update other fields of a story"
+        http_method: PUT
+        uri: "stories/{storyId}"
+        access_level: private
+        rate_limit: 20/60
+
+        params {
+            storyId: integer       // Story ID (path parameter)
+            parent: integer?       // Parent story ID
+            module: integer?            // Module ID
+            source: StorySource?        // Source
+            sourceNote: string?         // Source note
+            pri: integer?               // Priority
+            category: StoryCategory?    // Category
+            estimate: number?           // Estimate hours
+            keywords: string?           // Keywords
+            status: StoryStatus?        // Status
+            stage: StoryStage?          // Stage
+            assignedTo: string?         // Assigned to
+            reviewer: array<string>     // Reviewer accounts
+        }
+
+        response: object{}
+    }
+
+    method change_story {
+        description: "Change story information"
+        http_method: POST
+        uri: "stories/{storyId}/change"
+        access_level: private
+        rate_limit: 20/60
+
+        params {
+            storyId: integer       // Story ID (path parameter)
+            title: string?         // Title
+            spec: string?          // Specification
+            verify: string?        // Verification criteria
+            reviewer: array<string>? // Reviewer accounts
+        }
+
+        response: object{}
+    }
+
+    method delete_story {
+        description: "Delete story from ZenTao system"
+        http_method: DELETE
+        uri: "stories/{storyId}"
+        access_level: private
+        rate_limit: 10/60
+
+        params {
+            storyId: integer       // Story ID (path parameter)
+        }
+
+        response: object{}
+    }
+
+    method get_product_stories {
+        description: "Get story list for a product"
+        http_method: GET
+        uri: "products/{productId}/stories"
+        access_level: public
+        rate_limit: 50/60
+
+        params {
+            productId: integer     // Product ID (path parameter)
+            branchId: integer?     // Branch ID (query)
+            moduleId: integer?     // Module ID (query)
+            status: string?        // Status (query)
+            page: integer = 1      // Page number (min 1)
+            limit: integer = 20    // Page size (1-100)
+        }
+
+        response: object{}
+    }
+
+    method get_execution_stories {
+        description: "Get story list for an execution"
+        http_method: GET
+        uri: "executions/{executionId}/stories"
+        access_level: public
+        rate_limit: 50/60
+
+        params {
+            executionId: integer   // Execution ID (path parameter)
+            status: string?        // Status (query)
+            page: integer = 1      // Page number (min 1)
+            limit: integer = 20    // Page size (1-100)
+        }
+
+        response: object{}
+    }
+
+    method get_project_stories {
+        description: "Get story list for a project"
+        http_method: GET
+        uri: "projects/{projectId}/stories"
+        access_level: public
+        rate_limit: 50/60
+
+        params {
+            projectId: integer     // Project ID (path parameter)
+            status: string?        // Status (query)
+            page: integer = 1      // Page number (min 1)
+            limit: integer = 20    // Page size (1-100)
+        }
+
+        response: object{}
+    }
+
+    method assign_story {
+        description: "Assign a story to a specific user"
+        http_method: POST
+        uri: "stories/{storyId}/assign"
+        access_level: private
+        rate_limit: 20/60
+
+        params {
+            storyId: integer       // Story ID (path parameter)
+            assignedTo: string     // Assigned to user account
+            comment: string?       // Comment
+        }
+
+        response: object{}
+    }
+
+
+    method commit_story {
+        description: "Commit a story"
+        http_method: PUT
+        uri: "stories/{storyId}"
+        access_level: private
+        rate_limit: 20/60
+
+        params {
+            storyId: integer                    // Story ID (path parameter)
+            status: StoryStatus = reviewing     // Status
+            reviewer: array<string>             // Reviewer accounts
+        }
+
+        response: object{}
+    }
+
+    method active_story{
+        description: "Active a story"
+        http_method: POST
+        uri: "stories/{storyId}"
+        access_level: private
+        rate_limit: 20/60
+
+        params {
+            storyId: integer                    // Story ID (path parameter)
+            status: StoryStatus = active        // Status
+            reviewer: array<string>             // Reviewer accounts
+        }
+
+        response: object{}
+    }
+
+    method close_story {
+        description: "Close a story in ZenTao system"
+        http_method: POST
+        uri: "stories/{storyId}/close"
+        access_level: private
+        rate_limit: 20/60
+
+        params {
+            storyId: integer       // Story ID (path parameter)
+            closedReason: string   // Close reason
+            duplicate: integer?    // Duplicate story ID
+            comment: string?       // Comment
+        }
+
+        response: object{}
+    }
+}

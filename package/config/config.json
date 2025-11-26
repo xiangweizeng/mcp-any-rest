@@ -1,0 +1,54 @@
+{
+  "server": {
+    "port": 8083,
+    "log_level": "info"
+  },
+  "api": {
+    "base_url": "https://119.96.179.118:8081/zentao/api.php/v1",
+    "timeout": 30
+  },
+  "auth": {
+    "mode": "login",
+    "direct_config": null,
+    "login_config": {
+      "auth_type": "json",
+      "url": "https://119.96.179.118:8081/zentao/api.php/v1/tokens",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "body": {
+        "format": "json",
+        "content": {
+          "account": "admin",
+          "password": "Aaa@123"
+        }
+      },
+      "response_format": "json",
+      "token_extraction": {
+        "tokens": [
+          {
+            "source_location": "body",
+            "source_key": "token",
+            "format": "raw",
+            "target_location": "header",
+            "target_key": "Token"
+          }
+        ]
+      },
+      "refresh_url": null,
+      "refresh_method": null
+    },
+    "token_expiry": 3600,
+    "refresh_buffer": 300,
+    "max_retry_attempts": 3
+  },
+  "module_config": {
+    "default_access_level": "Internal",
+    "default_rate_limit": {
+      "requests_per_minute": 60,
+      "requests_per_hour": 1000,
+      "burst_capacity": 10
+    }
+  }
+}

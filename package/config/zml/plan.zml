@@ -1,0 +1,162 @@
+// ZenTao Module Language (ZML) - Plan Module
+
+module plan {
+    version: "1.0.0"
+    description: "Product plan service for ZenTao system. Provides product plan management capabilities."
+    enabled: true
+    access_level: public
+
+    // Basic types
+    enum plan_status {
+        wait
+        doing
+        done
+        suspended
+        closed
+    }
+
+    // Methods
+    method get_plans {
+        description: "Get product plan list from ZenTao system"
+        http_method: GET
+        uri: "products/{productId}/plans"
+        access_level: public
+        rate_limit: 50/60
+
+        params {
+            productId: integer      // Product ID
+            page: integer?          // Page number
+            limit: integer?         // Page limit
+        }
+
+        response: object{}
+    }
+
+    method get_plan {
+        description: "Get product plan details by plan ID"
+        http_method: GET
+        uri: "productplans/{planId}"
+        access_level: public
+        rate_limit: 50/60
+
+        params {
+            planId: integer         // Plan ID
+        }
+
+        response: object{}
+    }
+
+    method create_plan {
+        description: "Create a new product plan"
+        http_method: POST
+        uri: "products/{productId}/plans"
+        access_level: private
+        rate_limit: 20/60
+
+        params {
+            productId: integer      // Product ID
+            branch: integer?        // Branch ID
+            title: string           // Plan title
+            begin: string?          // Begin date
+            end: string?            // End date
+            desc: string?           // Plan description
+            parent: integer?        // Parent plan ID
+        }
+
+        response: object{}
+    }
+
+    method update_plan {
+        description: "Update an existing product plan"
+        http_method: PUT
+        uri: "productplans/{planId}"
+        access_level: private
+        rate_limit: 20/60
+
+        params {
+            planId: integer         // Plan ID
+            branch: integer?        // Branch ID
+            title: string?          // Plan title
+            begin: string?          // Begin date
+            end: string?            // End date
+            desc: string?           // Plan description
+            parent: integer?        // Parent plan ID
+        }
+
+        response: object{}
+    }
+
+    method delete_plan {
+        description: "Delete a product plan"
+        http_method: DELETE
+        uri: "productplans/{planId}"
+        access_level: private
+        rate_limit: 10/60
+
+        params {
+            planId: integer         // Plan ID
+        }
+
+        response: object{}
+    }
+
+    method link_stories {
+        description: "Link stories to a product plan"
+        http_method: POST
+        uri: "productplans/{planId}/linkstories"
+        access_level: private
+        rate_limit: 20/60
+
+        params {
+            planId: integer         // Plan ID
+            stories: array<integer> // Stories to link
+        }
+
+        response: object{}
+    }
+
+    method unlink_stories {
+        description: "Unlink stories from a product plan"
+        http_method: POST
+        uri: "productplans/{planId}/unlinkstories"
+        access_level: private
+        rate_limit: 20/60
+
+        params {
+            planId: integer         // Plan ID
+            stories: array<integer> // Stories to unlink
+        }
+
+        response: object{}
+    }
+
+    method link_bugs {
+        description: "Link bugs to a product plan"
+        http_method: POST
+        uri: "productplans/{planId}/linkbugs"
+        access_level: private
+        rate_limit: 20/60
+
+        params {
+            planId: integer         // Plan ID
+            bugs: array<integer>    // Bugs to link
+        }
+
+        response: object{}
+    }
+
+    method unlink_bugs {
+        description: "Unlink bugs from a product plan"
+        http_method: POST
+        uri: "productplans/{planId}/unlinkbugs"
+        access_level: private
+        rate_limit: 20/60
+
+        params {
+            planId: integer         // Plan ID
+            bugs: array<integer>    // Bugs to unlink
+        }
+
+        response: object{}
+    }
+}

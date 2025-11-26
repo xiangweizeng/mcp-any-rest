@@ -1,0 +1,98 @@
+// ZenTao Module Language (ZML) - Program Module
+
+module program {
+    version: "1.0.0"
+    description: "Program service for ZenTao system. Provides program management capabilities."
+    enabled: true
+    access_level: public
+
+    // Methods
+    method get_program_list {
+        description: "Get program list from ZenTao system"
+        http_method: GET
+        uri: "programs"
+        access_level: public
+        rate_limit: 50/60
+
+        params {
+            order: string?          // Order, default order_asc; field_underscore_asc/desc
+        }
+
+        response: object{}
+    }
+
+    method get_program_details {
+        description: "Get program details by program ID"
+        http_method: GET
+        uri: "programs/{programId}"
+        access_level: public
+        rate_limit: 50/60
+
+        params {
+            programId: integer      // Program ID (path parameter)
+        }
+
+        response: object{}
+    }
+
+    method create_program {
+        description: "Create a new program in ZenTao system"
+        http_method: POST
+        uri: "programs"
+        access_level: private
+        rate_limit: 20/60
+
+        params {
+            name: string?           // Program name
+            parent: string?         // Parent program, "0" means no parent
+            pm: string?             // Program manager
+            budget: integer?        // Budget amount
+            budgetUnit: string?     // Budget currency (CNY | USD)
+            desc: string?           // Program description
+            begin: string?          // Estimated start date
+            end: string?            // Estimated end date
+            acl: string?            // Access control (open public | private)
+            whitelist: array<string>? // Whitelist, effective when acl = private
+        }
+
+        response: object{}
+    }
+
+    method update_program {
+        description: "Update program information in ZenTao system"
+        http_method: PUT
+        uri: "programs/{programId}"
+        access_level: private
+        rate_limit: 20/60
+
+        params {
+            programId: integer      // Program ID (path parameter)
+            name: string?           // Program name
+            parent: string?         // Parent program, "0" means no parent
+            pm: string?             // Program manager
+            budget: integer?        // Budget amount
+            budgetUnit: string?     // Budget currency (CNY | USD)
+            desc: string?           // Program description
+            begin: string?          // Estimated start date
+            end: string?            // Estimated end date
+            acl: string?            // Access control (open public | private)
+            whitelist: array<string>? // Whitelist, effective when acl = private
+        }
+
+        response: object{}
+    }
+
+    method delete_program {
+        description: "Delete program from ZenTao system"
+        http_method: DELETE
+        uri: "programs/{programId}"
+        access_level: private
+        rate_limit: 10/60
+
+        params {
+            programId: integer      // Program ID (path parameter)
+        }
+
+        response: object{}
+    }
+}

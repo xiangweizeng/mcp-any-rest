@@ -1,0 +1,103 @@
+// ZenTao Module Language (ZML) - Product Module
+
+module product {
+    version: "1.0.0"
+    description: "Product service for ZenTao system. Provides product management capabilities."
+    enabled: true
+    access_level: public
+
+    // Methods
+    method get_product_list {
+        description: "Get product list from ZenTao system"
+        http_method: GET
+        uri: "products"
+        access_level: public
+        rate_limit: 50/60
+
+        params {
+            page: integer = 1       // Page number (required, minimum: 1)
+            limit: integer = 20     // Page size (required, range: 1-100)
+        }
+
+        response: object{}
+    }
+
+    method get_product {
+        description: "Get product details by product ID"
+        http_method: GET
+        uri: "products/{productId}"
+        access_level: public
+        rate_limit: 50/60
+
+        params {
+            productId: integer      // Product ID (path parameter)
+        }
+
+        response: object{}
+    }
+
+    method create_product {
+        description: "Create a new product in ZenTao system"
+        http_method: POST
+        uri: "products"
+        access_level: private
+        rate_limit: 20/60
+
+        params {
+            name: string            // Product name
+            program: integer?       // Program ID
+            code: string            // Product code
+            line: integer?          // Product line
+            po: integer?            // Product owner ID
+            qd: integer?            // Quality director ID
+            rd: integer?            // Release director ID
+            type: string?           // Product type (normal, branch, platform)
+            status: string?         // Product status (normal, closed)
+            acl: string?            // Access control (open, private)
+            whitelist: array<string>? // Whitelist
+            desc: string?           // Product description
+        }
+
+        response: object{}
+    }
+
+    method update_product {
+        description: "Update product information in ZenTao system"
+        http_method: PUT
+        uri: "products/{productId}"
+        access_level: private
+        rate_limit: 20/60
+
+        params {
+            productId: integer      // Product ID (path parameter)
+            name: string?           // Product name
+            code: string?           // Product code
+            type: string?           // Product type (normal, branch, platform)
+            line: integer?          // Product line
+            program: integer?       // Program ID
+            status: string?         // Product status (normal, closed)
+            desc: string?           // Product description
+            po: integer?            // Product owner ID
+            qd: integer?            // Quality director ID
+            rd: integer?            // Release director ID
+            acl: string?            // Access control (open, private)
+            whitelist: array<string>? // Whitelist
+        }
+
+        response: object{}
+    }
+
+    method delete_product {
+        description: "Delete product from ZenTao system"
+        http_method: DELETE
+        uri: "products/{productId}"
+        access_level: private
+        rate_limit: 10/60
+
+        params {
+            productId: integer      // Product ID (path parameter)
+        }
+
+        response: object{}
+    }
+}

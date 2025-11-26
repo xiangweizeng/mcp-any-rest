@@ -1,0 +1,16 @@
+{
+  "mcpServers": {
+    "mcp-any-rest": {
+      "command": "D:\\project\\mcp-any-rest\\package\\mcp-any-rest.exe",
+      "args": [
+        "--config-dir",
+        "D:\\project\\mcp-any-rest\\package\\config\\",
+        "--transport",
+        "stdio"
+      ],
+      "env": {
+        "RUST_LOG": "info"
+      }
+    }
+  }
+}
