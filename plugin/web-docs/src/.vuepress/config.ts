@@ -41,6 +41,7 @@ export default defineUserConfig({
     blog: {
       medias: {
         GitHub: "https://github.com/xiangweizeng/mcp-any-rest.git",
+        QQ: "https://qm.qq.com/q/Aid2Xodszu",
       },
     },
 

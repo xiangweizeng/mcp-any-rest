@@ -41,15 +41,15 @@ const i18n = {
           icon: "fas fa-envelope",
           title: "邮件联系",
           desc: "商业合作与咨询",
-          link: "mailto:support@mcp-any-rest.com",
+          link: "mailto:weilai.zeng@foxmail.com",
           linkText: "发送邮件"
         },
         {
           icon: "fas fa-message",
-          title: "微信交流",
+          title: "QQ交流群",
           desc: "加入开发者社群",
-          link: null,
-          actionText: "ID: MCP-ANY-REST"
+          link: "https://qm.qq.com/q/Aid2Xodszu",
+          linkText: "ID: MCP-ANY-REST"
         }
       ]
     },
@@ -88,15 +88,15 @@ const i18n = {
           icon: "fas fa-envelope",
           title: "Email",
           desc: "Business & Inquiries",
-          link: "mailto:support@mcp-any-rest.com",
+          link: "mailto:weilai.zeng@foxmail.com",
           linkText: "Send Email"
         },
         {
           icon: "fas fa-message",
-          title: "WeChat",
+          title: "QQ Group",
           desc: "Join Community",
-          link: null,
-          actionText: "ID: MCP-ANY-REST"
+          link: "https://qm.qq.com/q/Aid2Xodszu",
+          linkText: "ID: MCP-ANY-REST"
         }
       ]
     },

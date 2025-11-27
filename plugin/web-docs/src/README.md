@@ -85,7 +85,7 @@ MCP-ANY-REST 是一个开源项目，我们热烈欢迎任何形式的贡献！
 如果您在使用过程中遇到任何问题，或有任何建议，可以通过以下方式联系我们：
 
 - **GitHub Issues**: [提交反馈](https://github.com/xiangweizeng/mcp-any-rest/issues)
-- **Email**: `support@mcp-any-rest.com` (示例)
+- **Email**: `weilai.zeng@foxmail.com`
 
 ##  许可证
 
