@@ -1,0 +1,4 @@
+User-agent:*
+Disallow:
+
+Sitemap: https://xiangweizeng.github.io/mcp-any-rest/mcp-any-rest/sitemap.xml
