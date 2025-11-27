@@ -1,6 +1,29 @@
 # MCP-ANY-REST
 
-A generic Model Context Protocol (MCP) server for any REST backend. This project provides service composition, authentication, and dynamic module support. A ZenTao integration is included as an example configuration.
+## Project Vision
+
+In today's rapid AI development, Large Language Models (LLMs) show amazing capabilities, but securely and efficiently connecting them to massive existing business systems (REST APIs) remains a challenge.
+
+**MCP-ANY-REST** was born for this. Our mission is to **bridge the gap between LLMs and business data**.
+
+We are not just building a tool, but a bridge—a bridge that allows AI to understand and manipulate real-world data. By following the Model Context Protocol (MCP) standard, we enable any RESTful service to join the AI ecosystem with zero cost.
+
+## Core Value
+
+::: tip Write Once, Connect Anywhere
+No need to repeat development for every AI model. Configure once, run everywhere.
+:::
+
+## Tech Stack
+
+This project is built on a modern tech stack ensuring high performance and maintainability:
+
+| Domain | Technology |
+| :--- | :--- |
+| **Core Logic** | Rust |
+| **Protocol Standard** | Model Context Protocol (MCP) |
+| **Config Language** | ZML |
+| **Doc Site** | VuePress + Theme Hope |
 
 ## ZML Documentation
 

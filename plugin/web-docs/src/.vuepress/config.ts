@@ -42,6 +42,8 @@ export default defineUserConfig({
       medias: {
         GitHub: "https://github.com/xiangweizeng/mcp-any-rest.git",
         QQ: "https://qm.qq.com/q/Aid2Xodszu",
+        Email: "weilai.zeng@foxmail.com",
+        Gitee: "https://gitee.com/damone/mcp-any-rest.git",
       },
     },
 
