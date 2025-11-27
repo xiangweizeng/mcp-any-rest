@@ -85,7 +85,7 @@ If you are interested in connecting AI with the real world, welcome to visit our
 If you encounter any issues or have any suggestions, please contact us via:
 
 - **GitHub Issues**: [Submit Feedback](https://github.com/xiangweizeng/mcp-any-rest/issues)
-- **Email**: `support@mcp-any-rest.com` (Example)
+- **Email**: `damonexw@163.com`
 
 ## License
 

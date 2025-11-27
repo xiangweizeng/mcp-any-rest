@@ -4,7 +4,7 @@ import { viteBundler } from "@vuepress/bundler-vite"
 import { mdEnhancePlugin } from "vuepress-plugin-md-enhance"
 
 export default defineUserConfig({
-  base: "/",
+  base: "/mcp-any-rest/",
 
   locales: {
     "/": {
@@ -20,7 +20,7 @@ export default defineUserConfig({
   },
 
   head: [
-    ["link", { rel: "icon", href: "/favicon.svg" }]
+    ["link", { rel: "icon", href: "/mcp-any-rest/favicon.ico" }]
   ],
 
   bundler: viteBundler(),
@@ -36,7 +36,7 @@ export default defineUserConfig({
     logo: "/logo.svg",
     repo: "https://github.com/xiangweizeng/mcp-any-rest",
     docsDir: "web-docs/src",
-    darkmode: "switch",
+    darkmode: "toggle",
 
     blog: {
       medias: {

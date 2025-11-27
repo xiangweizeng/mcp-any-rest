@@ -31,9 +31,9 @@ const i18n = {
       title: "联系我们",
       items: [
         {
-          icon: "fab fa-github",
+          icon: "fas fa-link",
           title: "GitHub",
-          desc: "提交 Issue 或 PR",
+          desc: "Submit Issue 或 PR",
           link: "https://github.com/xiangweizeng/mcp-any-rest",
           linkText: "访问仓库"
         },
@@ -45,7 +45,7 @@ const i18n = {
           linkText: "发送邮件"
         },
         {
-          icon: "fab fa-weixin",
+          icon: "fas fa-message",
           title: "微信交流",
           desc: "加入开发者社群",
           link: null,
@@ -389,8 +389,13 @@ const releases = computed(() => {
     
     .goals-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      grid-template-columns: repeat(3, 1fr);
       gap: 1.5rem;
+      max-width: 100%;
+      
+      @media (max-width: 959px) {
+        grid-template-columns: 1fr;
+      }
       
       .goal-card {
         background: var(--c-bg-soft);
@@ -399,7 +404,10 @@ const releases = computed(() => {
         transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
         display: flex;
         flex-direction: column;
-        align-items: center;
+        width: 100%;
+        height: 100%;
+        box-sizing: border-box;
+        text-align: center;
         gap: 1rem;
         border: 1px solid transparent;
         
@@ -424,13 +432,17 @@ const releases = computed(() => {
         }
         
         .goal-icon {
-          font-size: 3rem;
-          margin-bottom: 0.5rem;
-        }
+        font-size: 3rem;
+        margin-bottom: 0.5rem;
+        align-self: center;
+      }
         
         .goal-text {
           font-size: 1.1rem;
           font-weight: 500;
+          overflow-wrap: anywhere;
+          word-break: break-word;
+          max-width: 100%;
         }
       }
     }
@@ -448,10 +460,14 @@ const releases = computed(() => {
 
     .contact-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      grid-template-columns: repeat(3, 1fr);
       gap: 1.5rem;
-      max-width: 1000px;
+      max-width: 100%;
       margin: 0 auto;
+
+      @media (max-width: 959px) {
+        grid-template-columns: 1fr;
+      }
     }
     
     .contact-card {
@@ -460,7 +476,10 @@ const releases = computed(() => {
       border-radius: 16px;
       display: flex;
       flex-direction: column;
-      align-items: center;
+      width: 100%;
+      height: 100%;
+      box-sizing: border-box;
+      text-align: center;
       gap: 1rem;
       text-decoration: none;
       color: inherit;
@@ -508,6 +527,7 @@ const releases = computed(() => {
         margin-bottom: 0.5rem;
         transition: all 0.3s ease;
         color: var(--c-text-light);
+        align-self: center;
       }
       
       .card-content {
@@ -515,11 +535,15 @@ const releases = computed(() => {
         flex-direction: column;
         align-items: center;
         gap: 0.5rem;
+        width: 100%;
         
         h4 {
           margin: 0;
           font-size: 1.2rem;
           font-weight: 600;
+          overflow-wrap: anywhere;
+          word-break: break-word;
+          max-width: 100%;
         }
         
         p {
@@ -527,6 +551,9 @@ const releases = computed(() => {
           font-size: 0.9rem;
           color: var(--c-text-quote);
           margin-bottom: 1rem;
+          overflow-wrap: anywhere;
+          word-break: break-word;
+          max-width: 100%;
         }
       }
       
@@ -662,6 +689,90 @@ const releases = computed(() => {
         
         &:last-child {
           margin-bottom: 0;
+        }
+      }
+    }
+  }
+
+  // Mobile Responsiveness
+  @media (max-width: 719px) {
+    .about-header {
+      padding: 3rem 0 2rem;
+      
+      .about-logo img {
+        height: 120px;
+        margin-bottom: 1.5rem;
+      }
+      
+      h1 {
+        font-size: 2.5rem;
+      }
+      
+      .tagline {
+        font-size: 1.2rem;
+        padding: 0 1rem;
+      }
+      
+      .header-actions {
+        flex-direction: column;
+        align-items: center;
+        gap: 0.8rem;
+        
+        .action-btn {
+          width: 80%;
+          justify-content: center;
+        }
+      }
+    }
+    
+    .about-content {
+      margin: 2rem 0;
+      
+      .intro-section {
+        margin-bottom: 3rem;
+        
+        h2 {
+          font-size: 1.8rem;
+        }
+      }
+      
+      .goals-grid, .contact-grid {
+        gap: 1rem;
+        padding: 0 1rem;
+      }
+    }
+    
+    .timeline-section {
+      margin: 3rem auto;
+      
+      h2 {
+        font-size: 1.8rem;
+        margin-bottom: 2rem;
+      }
+      
+      .timeline {
+        padding-left: 1.5rem;
+        
+        .timeline-item {
+          padding-left: 1.5rem;
+          
+          .timeline-marker {
+            left: calc(-1.5rem - 5px);
+          }
+          
+          .timeline-content {
+            padding: 1.2rem;
+            
+            .timeline-header {
+              flex-direction: column;
+              align-items: flex-start;
+              gap: 0.5rem;
+              
+              .release-date {
+                font-size: 0.85rem;
+              }
+            }
+          }
         }
       }
     }
